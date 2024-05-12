@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.cadastro.css">
+    <link rel="shortcut icon" href="../Site-Institucional/assent/Escudo.png" type="image/x-icon">
+    <title>Ministério | Cadastro</title>
+</head>
+
+<body>
+    <header>
+        <div id="logo-Ministerio">
+            <a href="../Site-Institucional/site.index.html">
+                <img src="../Site-Institucional/assent/Escudo.png" alt="escudo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../Site-Institucional/site.index.html">INICIO</a></li>
+                <li><a href="../Site-Institucional/site.sobre-nos.html">SOBRE NÓS</a></li>
+                <li><a href="../Site-Institucional/site.Contato.html">CONTATO</a></li>
+            </ul>
+        </nav>
+        <div class="container-login">
+            <a href="site.login.html" class="login-button">LOGIN</a>
+        </div>
+    </header>
+    <h1 class="titulo">Registre-se</h1>
+
+    <div class="cadastro">
+        <form>
+            <div class="campos">
+                <div class="cadastrar">
+                    <label for="email" class="cadastrar-label-1">Endereço de email</label>
+                    <input type="email" id="input_email" placeholder="Seu email">
+                </div>
+                <div class="cadastrar">
+                    <label for="email" class="cadastrar-label-2">Senha</label>
+                    <input type="password" id="input_senha" placeholder="Sua senha">
+                </div>
+                <div class="cadastrar">
+                    <label for="senha" class="cadastrar-label-3">Confirmação Senha</label>
+                    <input type="password" id="input_senhaConfirmada" placeholder="Sua senha">
+                </div>
+                <div class="cadastrar">
+                    <label for="telefone" class="cadastrar-label-4">Telefone</label>
+                    <input type="number" id="input_telefone" placeholder="Seu telefone">
+                </div>
+                <button type="button" class="botao" onclick="registrar()">Registre-se</button>
+                <p class="login">Já tem uma conta? <a href="site.login.html"> Entre aqui</a></p>
+            </div>
+        </form>
+       
+    </div>
+   
+    <footer>
+        © 2024 MorallesTech. Todos os direitos reservados.
+    </footer>
+    <div id="div_alert"></div>
+   
+    
+</body>
+
+   
+</html>
+
+
+<script src="cod.verificacao.js"></script>

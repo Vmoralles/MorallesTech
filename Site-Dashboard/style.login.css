@@ -1,0 +1,217 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFE0;
+    font-family: 'Inter', sans-serif;
+  
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 210vh;
+    height: 11vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #0057B6, #1165bf, #2e72bc, #437dbb);
+    border-bottom: 0.5vh solid black;
+    z-index: 999;
+}
+
+#logo-Ministerio img {
+    width: 13vh;
+    height: 10.2vh;
+    flex: 0 0 auto;
+    border-radius: 1vh;
+    border: 0.3vh solid #FDCD1C;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 1vh;
+    display: flex;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #FFFFE0;
+    margin: 20vh;
+    cursor: pointer;
+    padding: 1vh 2vh;
+    font-size: 2.5vh;
+}
+
+nav ul li a:hover {
+    color: #003366;
+    animation: zoomIn 0.3s ease-out forwards;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.container-login {
+    margin-right: 3vh;
+    font-size: 2.5vh;
+}
+
+.login-button {
+    padding: 1.5vh 3vh;
+    background-color: #FDCD1C;
+    color: #0057B6;
+    text-decoration: none;
+    border-radius: 1vh;
+    transition: background-color 0.7s, color 0.7s, transform 0.7s;
+}
+
+.login-button:hover {
+    background-color: #002855;
+    color: #FDCD1C;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40vw;
+    height: 60vh;
+    background-color: #FDCD1C;
+    border: 0.5vh solid #0057B6;
+    border-radius: 3vh;
+    background-image: linear-gradient(to right, #FDCD1C, #ebbe1c);
+    margin-top: 6vh;
+    margin-left: 31vw;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.5);
+}
+
+.titulo {
+    font-size: 7.5vh;
+    font-weight: medium;
+    text-align: center;
+    margin-top: 13vh;
+    margin-bottom: -3vh;
+    margin-left: 3vw;
+    color: black;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 15px;
+    margin-top: 13vh;
+}
+
+.registro {
+    margin-bottom: 20px;
+}
+.registro label {
+    font-size: 2.5vh;
+    color: #000000;
+    margin-top: 13vh;
+}
+.registro-label-1 {
+    margin-left: 12vw; 
+}
+.registro-label-2 {
+    margin-left: 15vw;
+    
+}
+.registro input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1vh;
+    margin-top: 1vh;
+    text-align: center;
+    width: 70vh;
+    height: 3vh;
+    border-radius: 2vh;
+    border: 0px solid #000;
+    background-color: #fff;
+    padding: 2vh;
+    font-size: 2.5vh;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    
+}
+.registro:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+.botao {
+    width: 20vw;
+    height: 7vh;
+    margin-top: 1vh;
+    background-color: #0057B6;
+    color: #FDCD1C;
+    font-size: 4vh;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-radius: 6vh;
+    box-shadow: 0px 4px 8px rgba(219, 177, 155, 0.3);
+    text-shadow: 2px 2px 4px rgba(219, 177, 155, 0.3);
+    cursor: pointer;
+    margin-left: 8.5vw;
+    margin-top: 1vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+.botao:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #0057B6;
+}
+
+
+.registrar {
+    color: black;
+    margin-bottom: 10vh;
+    margin-left: 2.3vw;
+}
+
+.registrar a {
+    color: #0057B6;
+    text-decoration: none;
+}
+
+.registrar a:hover {
+    text-decoration: underline;
+}
+footer {
+    background-color: #0057B6;
+    color: #fdfdfd;
+    text-align: center;
+    padding: 1px;
+    position: fixed;
+    bottom: 0;
+    width: 209vh;
+    height: 2.5vh;
+    font-size: 2vh;
+}
+#div_alert{
+    color: #FDCD1C;;
+    text-align: center;
+    margin: 2vh auto;
+    width: 13vw; 
+    border-radius: 1vh;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 1);
+    background-color: #0057B6;
+    margin-left: 45vw;
+}

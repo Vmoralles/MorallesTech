@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFE0;
+    font-family: 'Inter', sans-serif;
+
+}
+
+header {
+    position: sticky;
+    top: 0;
+    width: 210vh;
+    height: 11vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to right, #0057B6, #1165bf, #2e72bc, #437dbb);
+    border-bottom: 0.5vh solid black;
+    z-index: 999;
+}
+
+#logo-Ministerio img {
+    width: 13vh;
+    height: 10.2vh;
+    flex: 0 0 auto;
+    border-radius: 1vh;
+    border: 0.3vh solid #FDCD1C;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
+}
+
+#logo-Sair img {
+    margin-right: 1vw;
+    width: 10vh;
+    height: 8vh;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 5vh;
+    display: flex;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #FFFFE0;
+    margin: 20vh;
+    cursor: pointer;
+    padding: 1vh 2vh;
+    font-size: 2.5vh;
+}
+
+nav ul li a:hover {
+    color: #003366;
+    animation: zoomIn 0.3s ease-out forwards;
+}
+
+@keyframes zoomIn {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.tema {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5vh;
+    gap: 2vw;
+    margin-left: 45px;
+    margin-right: 45px;
+}
+
+.esquerda {
+    margin-top: 25vh;
+    display: flex;
+    flex-direction: column;
+    width: 33.3%;
+    background-color: #FDCD1C;
+    height: 38vh;
+    border: solid 2px #0057B6;
+
+}
+
+.meio {
+    display: flex;
+    flex-direction: column;
+    width: 33.3%;
+    background-color: #FDCD1C;
+    height: auto;
+    border: solid 2px #0057B6;
+}
+.direita {   
+    display: flex;
+    flex-direction: column;
+    width: 33.3%;
+    background-color: #FDCD1C;
+    height: auto;
+    border: solid 2px #0057B6;
+
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    padding: 2px;
+    margin-top: 4vh;
+    margin-bottom: 1vh;
+    background-color: #0057B6;
+    border: solid 2px white;
+    color: white;
+    border-radius: 50vw;
+    text-align: center;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease;
+}
+
+.card:hover {
+    background-color: #004080;
+    transform: scale(1.05);
+    opacity: 0.9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.card img {
+    width: 3vh;
+    height: 2vh;
+}
+
+.barra {
+    background-color: #0057B6;
+    border: solid 2px white;
+    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, border-radius 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease;
+    border-radius: 50vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    padding: 2px;
+    margin-top: 4vh;
+    margin-bottom: 1vh;
+    background-color: #0057B6;
+    border: solid 2px white;
+}
+
+.format {
+    margin-top: 1vh;
+    background-color: white;
+    border: solid 2px #0057B6;
+    border-radius: 50vw;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    text-align: center;
+}
+
+
+.texto {
+    margin-top: 3vh;
+    text-align: center;
+    font-size: 2.5vh;
+    color: black;
+}
+
+.grafico {
+    border-top: 1px solid #0057B6;
+    height: auto;
+    width: auto;
+    margin-top: 1vh;
+    border-bottom: 1px solid #0057B6;
+}
+
+.botao {
+    margin-top: 2vh;
+    background-color: #0057B6;
+    color: #FDCD1C;
+    font-size: 2vh;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1vh;
+    border: none;
+    border-radius: 6vh;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    height: 5vh;
+    width: 10vw;
+    margin-left: 20vh;
+}
+
+.botao:hover {
+    background-color: #FDCD1C;
+    color: #0057B6;
+}
+.titulo{
+    margin-bottom: -3vh;
+    text-align: center;
+    font-size: 2.5vh;
+    color: black;
+}
