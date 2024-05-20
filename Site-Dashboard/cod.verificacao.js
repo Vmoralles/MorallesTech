@@ -5,8 +5,8 @@ function registrar() {
     const senhaConfirmada = input_senhaConfirmada.value
     let verificarLetraMaiuscula = false
     let verificarCaracterEspecial = false
-    let caracteresEspeciais = "!@#$%^&*(),.?/:{}|<>"
-    let letrasMaiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    let caracteresEspeciais = ["!","@","#","$","%","^","&","*","()",",","?","/",":","{}","|","<",">",]
+    let letrasMaiusculas = ["A", "B", "C", "D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
     let senhaValidada = false
 
 
@@ -54,11 +54,11 @@ function registrar() {
             senhaValidada = true
         }
 
-        if (senhaValidada == false) {
+        if (senhaValidada) {
+            window.location.href = "site.login.html";
+        } else {
             div_alert.style.display = 'block';
             div_alert.innerHTML = "DIGITE UMA SENHA COM CARACTER ESPECIAL E LETRA MAISCULA"
-        } else {
-            window.location.href = "login.html";
         }
     }
 }

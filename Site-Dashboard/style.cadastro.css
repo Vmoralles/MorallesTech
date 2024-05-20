@@ -100,7 +100,7 @@ nav ul li a:hover {
     justify-content: center;
     align-items: center;
     width: 40vw;
-    height: 60vh;
+    height: 67vh;
     background-color: #FDCD1C;
     border: 0.5vh solid #0057B6;
     border-radius: 3vh;
@@ -143,6 +143,9 @@ nav ul li a:hover {
 
 .cadastrar-label-4 {
     margin-left: 14vw;
+}
+.cadastrar-label-5 {
+    margin-left: 15vw;
 }
 
 .cadastrar input {

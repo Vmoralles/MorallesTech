@@ -4,13 +4,13 @@ function gols() {
     const gol = parseInt(document.getElementById('input_gols').value);
 
     if (nome == "" || sobrenome == "" || isNaN(gol)) {
-        alert('Por favor, preencha o nome completo do jogador e a quantidade de gols.');
+        div_resultado.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de gols.`;
     } else {
         const jogador = nome + " " + sobrenome;
         let chart = Chart.getChart('myChart');
-        let playerIndex = chart.data.labels.indexOf(jogador);
+        let jogadorIndex = chart.data.labels.indexOf(jogador);
 
-        if (playerIndex !== -1) {
+        if (jogadorIndex !== -1) {
             chart.data.datasets[0].data[playerIndex] += gol;
         } else {
             chart.data.labels.push(jogador);
@@ -27,14 +27,14 @@ function assistencias() {
     const assistencia = parseInt(document.getElementById('input_assistencia').value);
 
     if (nome === "" || sobrenome === "" || isNaN(assistencia)) {
-        alert('Por favor, preencha o nome completo do jogador e a quantidade de assistência.');
+        div_resultado.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de assistência.`;
     } else {
         const jogador = nome + " " + sobrenome;
         let chart = Chart.getChart('myChart1');
-        let playerIndex = chart.data.labels.indexOf(jogador);
+        let jogadorIndex = chart.data.labels.indexOf(jogador);
 
-        if (playerIndex !== -1) {
-            chart.data.datasets[0].data[playerIndex] += assistencia;
+        if (jogadorIndex !== -1) {
+            chart.data.datasets[0].data[jogadorIndex] += assistencia;
         } else {
             chart.data.labels.push(jogador);
             chart.data.datasets[0].data.push(assistencia);
