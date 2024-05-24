@@ -84,12 +84,12 @@ nav ul li a:hover {
 }
 
 .esquerda {
-    margin-top: 25vh;
+    margin-top: 13vh;
     display: flex;
     flex-direction: column;
     width: 33.3%;
     background-color: #FDCD1C;
-    height: 38vh;
+    height: 65vh;
     border: solid 2px #0057B6;
 
 }
@@ -110,6 +110,33 @@ nav ul li a:hover {
     height: auto;
     border: solid 2px #0057B6;
 
+}
+#escudo img {
+    
+    width: 25vw;
+    height: 13vh;
+    margin-left: 7vw;
+    flex: 0 0 auto;
+    border-radius: 1vh;
+    background-color: #0057B6;
+    border: 0.3vh solid white;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 2vh;
+}
+#escudo-baixo img {
+    width: 25vw;
+    height: 13vh;
+    margin-left: 7vw;
+    flex: 0 0 auto;
+    border-radius: 1vh;
+    background-color: #0057B6;
+    border: 0.3vh solid white;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-top: 2vh;
 }
 
 @keyframes fadeIn {
@@ -210,7 +237,7 @@ nav ul li a:hover {
     cursor: pointer;
     height: 5vh;
     width: 10vw;
-    margin-left: 20vh;
+    margin-left: 22.5vh;
 }
 
 .botao:hover {

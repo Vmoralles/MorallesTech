@@ -1,26 +1,37 @@
 create database morallestech;
 use morallestech;
 
-create table jogo(
-idJogo int primary key auto_increment,
-dtJogo datetime,
-competicao varchar(100));
-
-create table treino(
-idTreino int primary key auto_increment,
-dtTreino datetime);
-
 create table usuario(
-idUsuario int auto_increment,
-fkjogo int,
-fkTreino int,
+idUsuario int  primary key auto_increment,
 nome varchar(45),
+sobrenome varchar(255),
 email varchar(255) unique,
 senha varchar(255),
-telefone char(9),
-constraint pkcomposta primary key(idUsuario,fkJogo,fkTreino),
-constraint fkJogo foreign key (fkJogo) references jogo(idJogo),
-constraint fkTreino foreign key (fkTreino) references treino(idTreino));
+telefone char(11));
+	
+    select * from usuario;
+create table jogo(
+idJogo int primary key auto_increment,
+jogo varchar(255),
+dtJogo datetime,
+competicao varchar(100),
+fkUsuario int,
+constraint fkUsuario foreign key (fkUsuario) references Usuario(idUsuario));
+
+insert into jogo values
+(1, "Ministerio X Trevo","2024-05-25 19:00:00", "Copa Noturna", default);
+
+create table estatisticas(
+fkUsuario int,
+fkJogo int,
+idEsta int,
+nome varchar(255),
+sobrenome varchar(255),
+qtdAssistencia int,
+qtdGol int,
+constraint pkComposta primary key (fkUsuario, fkJogo, idEsta),
+constraint chk_fkUsuario foreign key (fkUsuario) references usuario(idUsuario),
+constraint chk_fkJogo foreign key (fkJogo) references jogo(idJogo));
 
 create table contato(
 idContato int auto_increment,
@@ -30,37 +41,20 @@ email  varchar(255)unique,
 assunto varchar(255),
 problema varchar(255),
 constraint pkComposta primary key (idContato, fkUsuario),
-constraint fkUsuario foreign key (fkUsuario) references usuario(idUsuario));
+constraint chkfkUsuario foreign key (fkUsuario) references usuario(idUsuario));
 
 create table treinoArtilheiro(
 idArtilheiro int primary key auto_increment,
 nome varchar(255),
 sobrenome varchar(255),
 gol int,
-fkTreino int,
-constraint chkfkTreino foreign key (fkTreino) references treino(idTreino));
+fkUsuario int,
+constraint chkfkTreino foreign key (fkUsuario) references usuario(idUsuario));
 
 create table treinoMaestro(
 idMaestro int primary key auto_increment,
 nome varchar(255),
 sobrenome varchar(255),
 assistencia int,
-fkTreino int,
-constraint Chk_fkTreino foreign key (fkTreino) references treino(idTreino));
-
-create table jogoArtilheiro(
-idArtilheiro int primary key auto_increment,
-nome varchar(255),
-sobrenome varchar(255),
-gol int,
-fkjogo int,
-constraint chkfkjogo foreign key (fkjogo) references jogo(idJogo));
-
-create table jogoMaestro(
-idMaestro int primary key auto_increment,
-nome varchar(255),
-sobrenome varchar(255),
-assistencia int,
-fkjogo int,
-constraint chk_fkjogo foreign key (fkjogo) references jogo(idJogo));
-
+fkUsuario int,
+constraint chk_fkTreino foreign key (fkUsuario) references usuario(idUsuario));

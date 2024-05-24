@@ -100,7 +100,7 @@ nav ul li a:hover {
     justify-content: center;
     align-items: center;
     width: 40vw;
-    height: 67vh;
+    height: 70vh;
     background-color: #FDCD1C;
     border: 0.5vh solid #0057B6;
     border-radius: 3vh;
@@ -120,7 +120,7 @@ nav ul li a:hover {
 
 
 .cadastrar {
-    margin-bottom: 1vh;
+    margin-bottom: 0vh;
 }
 
 .cadastrar label {
@@ -130,23 +130,27 @@ nav ul li a:hover {
 }
 
 .cadastrar-label-1 {
-    margin-left: 11vw;
+    margin-left: 12vw;
 }
 
 .cadastrar-label-2 {
-    margin-left: 14vw;
+    margin-left: 15vw;
 }
 
 .cadastrar-label-3 {
-    margin-left: 11vw;
+    margin-left: 12vw;
 }
 
 .cadastrar-label-4 {
-    margin-left: 14vw;
+    margin-left: 15vw;
 }
 .cadastrar-label-5 {
     margin-left: 15vw;
 }
+.cadastrar-label-6 {
+    margin-left: 14vw;
+}
+
 
 .cadastrar input {
     display: flex;

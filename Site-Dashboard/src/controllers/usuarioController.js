@@ -23,11 +23,14 @@ function autenticar(req, res) {
                             email: resultadoAutenticar[0].email,
                             nome: resultadoAutenticar[0].nome,
                             senha: resultadoAutenticar[0].senha,
+                            idUsuario: resultadoAutenticar[0].idUsuario,
                         });
 
                     } else if (resultadoAutenticar.length == 0) {
+                        div_alert.innerHTML += "Email e/ou senha inválido(s)"
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
+                        div_alert.innerHTML += "Email e/ou senha inválido(s)"
                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");
                     }
                 }
@@ -45,10 +48,11 @@ function autenticar(req, res) {
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
+    var sobrenome = req.body.sobrenomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var telefone = req.body.telefoneServer;
- 
+
 
 
 
@@ -61,10 +65,12 @@ function cadastrar(req, res) {
         res.status(400).send("Seu email está undefined!");
     } else if (telefone == undefined) {
         res.status(400).send("Sua telefone está undefined!");
+    }else if (sobrenome == undefined) {
+        res.status(400).send("Seu sobrenome está undefined!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha, telefone)
+        usuarioModel.cadastrar(nome, sobrenome, email, senha, telefone)
             .then(
                 function (resultado) {
                     res.json(resultado);

@@ -4,6 +4,7 @@ function registrar() {
     const telefone = input_telefone.value
     const email = input_email.value
     const senhaConfirmada = input_senhaConfirmada.value
+    const sobrenome = input_sobrenome.value
     let verificarLetraMaiuscula = false
     let verificarCaracterEspecial = false
     let caracteresEspeciais = ["!", "@", "#", "$", "%", "^", "&", "*", "()", ",", "?", "/", ":", "{}", "|", "<", ">",]
@@ -17,7 +18,8 @@ function registrar() {
         senha == "" ||
         telefone == "" ||
         senhaConfirmada == "" ||
-        nome == "") {
+        nome == "" ||
+        sobrenome  == "") {
         div_alert.innerHTML = "PREENCHA TODOS <br> OS CAMPOS!"
 
     }
@@ -42,7 +44,7 @@ function registrar() {
         div_alert.innerHTML = "A SENHA TEM QUE TER NO MINIMO 8 CARACTERES"
     }
     // verificação de caracter especial + letra maiuscula + for
-    else {
+    else if(!senha.indexOf(caracteresEspeciais)) {
         for (let senhaVerificiar = 0; senhaVerificiar < senha.length; senhaVerificiar++) {
             let char = senha[senhaVerificiar]
             if (caracteresEspeciais.indexOf(char) != -1) {
@@ -60,48 +62,51 @@ function registrar() {
             div_alert.style.display = 'block';
             div_alert.innerHTML = "DIGITE UMA SENHA COM CARACTER ESPECIAL E LETRA MAISCULA"
         }
-    }
-    fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            // crie um atributo que recebe o valor recuperado aqui
-            // Agora vá para o arquivo routes/usuario.js
-            nomeServer: nome,
-            emailServer: email,
-            senhaServer: senha,
-            telefoneServer: telefone,
+    } else {
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nome,
+                sobrenomeServer: sobrenome,
+                emailServer: email,
+                senhaServer: senha,
+                telefoneServer: telefone,
 
 
-        }),
-    })
-        .then(function (resposta) {
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                div_alert.style.display = "block";
-
-                div_alert.innerHTML.innerHTML =
-                    "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                setTimeout(() => {
-                    window.location = "site.login.html";
-                }, "2000");
-
-                limparFormulario();
-
-            } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
-            }
+            }),
         })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-        });
+                if (resposta.ok) {
+                    div_alert.style.display = "block";
 
-    return false;
+                    div_alert.innerHTML.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "site.login.html";
+                    }, "2000");
+
+                    limparFormulario();
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+    }
+
 }
 
 function sumirMensagem() {

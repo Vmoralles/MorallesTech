@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
 </head>
 
 <body>
-    
+
     <header>
         <div id="logo-Ministerio">
             <a href="site_index.html">
@@ -31,13 +32,47 @@
         </div>
     </header>
     <div class="tema">
-        <div class="central">
+        <div class="esquerda">
             <div class="barra"></div>
-            <h1 class="titulo">BEM VINDO</h1>
+            <h1 class="titulo">CRUZADINHA</h1>
             <div class="barra"></div>
-            <span class="texto">Bem-vindo ao seu portal do Ministério do Esporte. Este é o lugar onde você pode acompanhar os jogos, conferir estatísticas dos jogadores dentro de jogos e nos treinos</span>
+            <BUTton class="botao" onclick="jogar()">JOGAR</BUTton>
+            <div class="barra"></div>
+        </div>
+        <div class="meio">
+            <div id="escudo">
+                <img src="assent/Soccer-amico.svg" alt="escudo" id="img-escudo">
+            </div>
+            <div>
+                <div class="barra"></div>
+                <h1 class="titulo">BEM VINDO</h1>
+                <div class="barra"></div>
+                <span class="texto">Bem-vindo ao seu portal do Ministério do Esporte. Este é o lugar onde você pode
+                    acompanhar os jogos, conferir estatísticas dos jogadores dentro de jogos e nos treinos</span>
+                <div class="barra"></div>
+            </div>
+            <div id="escudo-baixo">
+                <img src="assent/Football Goal-bro.svg" alt="escudo" id="img-escudo">
+            </div>
+        </div>
+        <div class="direita">
+            <div class="barra"></div>
+            <h1 class="titulo">DUVIDAS</h1>
+            <div class="barra"></div>
+            <BUTton class="botao" onclick="duvidas()">DUVIDAS</BUTton>
             <div class="barra"></div>
         </div>
     </div>
 </body>
+
 </html>
+
+<script>
+    function duvidas() {
+        window.location = "../dashboard/site.duvidas.html";
+
+    }
+    function jogar() {
+        window.location = "../dashboard/site.cruzadinha.html";
+    }
+</script>

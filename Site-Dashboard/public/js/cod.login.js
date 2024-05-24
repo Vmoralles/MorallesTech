@@ -6,7 +6,7 @@ function entrar() {
 
     if (senhaVar == "" || senhaVar == "") {
         div_alert.style.display = 'block';
-        ddiv_alert.innerHTML = "PREENCHA TODOS <br> OS CAMPOS!"
+        div_alert.innerHTML = "PREENCHA TODOS <br> OS CAMPOS!"
     }
 
 
@@ -28,15 +28,22 @@ function entrar() {
         if (resposta.ok) {
             console.log(resposta);
 
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                sessionStorage.EMAIL_USUARIO = json.email;
+                sessionStorage.NOME_USUARIO = json.nome;
+                sessionStorage.ID_USUARIO = json.idUsuario;
+                sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
 
-            setTimeout(function () {
-                window.location = "site_index.html";
-            }, 1000); // apenas para exibir o loading
+                setTimeout(function () {
+                    window.location = "site_index.html";
+                }, 1000); // apenas para exibir o loading
 
-
+            })
 
         } else {
-
+            div_alert.innerHTML = "Email e/ou senha inválido(s)"
             console.log("Houve um erro ao tentar realizar o login!");
 
             resposta.text().then(texto => {
