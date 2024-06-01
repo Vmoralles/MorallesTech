@@ -33,8 +33,11 @@ function entrar() {
                 console.log(JSON.stringify(json));
                 sessionStorage.EMAIL_USUARIO = json.email;
                 sessionStorage.NOME_USUARIO = json.nome;
-                sessionStorage.ID_USUARIO = json.idUsuario;
                 sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
+                sessionStorage.ID_USUARIO = json.idUsuario;
+                sessionStorage.FK_USUARIO = json.fkUsuario;
+                sessionStorage.FK_JOGO = json.fkJogo;
+                sessionStorage.ID_ESTA = json.idEsta;
 
                 setTimeout(function () {
                     window.location = "site_index.html";

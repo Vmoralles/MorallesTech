@@ -63,6 +63,7 @@
                 <span><img src="../assent/Escudo.png" alt=""> Mini. De Esporte x Trevo <img src="../assent/Trevo.png" alt=""></span>
             </div>
             <div class="barra"></div>
+            <div id="div_jogo"></div>
         </div>
         <div class="meio">
             <h1 class="titulo">Artilheiros</h1>
@@ -71,7 +72,7 @@
                 <canvas id="myChart"></canvas>
             </div>
             <div class="barra"></div>
-            <span class="texto"> Digite o nome de quem fez gol no jogo</span>
+            <span class="texto"> Nome</span>
             <input type="text" id="input_nome_gol" class="format">
             <span class="texto">Sobrenome</span>
             <input type="text" id="input_sobrenome_gol" class="format">
@@ -80,7 +81,6 @@
             <span class="texto">Jogo</span>
             <input type="number" id="input_jogo" class="format">
             <button onclick="gols()" id="btn_gols" class="botao">Enviar</button>
-            <div id="div_resultado"></div>
             <div class="barra"></div>
         </div>
         <div class="direita">
@@ -90,7 +90,7 @@
                 <canvas id="myChart1"></canvas>
             </div>
             <div class="barra"></div>
-            <span class="texto"> Digite o nome de quem deu assistência no jogo</span>
+            <span class="texto"> Nome</span>
             <input type="text" id="input_nome_assistencia" required class="format">
             <span class="texto">Sobrenome</span>
             <input type="text" id="input_sobrenome_assistencia" class="format">
@@ -99,7 +99,6 @@
             <span class="texto">Jogo</span>
             <input type="number" id="input_jogo" class="format">
             <button onclick="assistencias()" id="btn_assistencia" class="botao">Enviar</button>
-            <div id="div_resultado"></div>
             <div class="barra"></div>
         </div>
     </div>
@@ -107,5 +106,4 @@
 
 </html>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../js/cod.grafico.jogo.js"></script>
 <script src="../js/cod.jogos.js"></script>

@@ -24,6 +24,7 @@ function autenticar(req, res) {
                             nome: resultadoAutenticar[0].nome,
                             senha: resultadoAutenticar[0].senha,
                             idUsuario: resultadoAutenticar[0].idUsuario,
+                            sobrenome: resultadoAutenticar[0].sobrenome
                         });
 
                     } else if (resultadoAutenticar.length == 0) {

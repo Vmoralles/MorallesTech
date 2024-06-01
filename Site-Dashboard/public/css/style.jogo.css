@@ -199,7 +199,7 @@ nav ul li a:hover {
     cursor: pointer;
     height: 5vh;
     width: 10vw;
-    margin-left: 22vh;
+    margin-left: 20vh;
 }
 
 .botao:hover {
@@ -221,13 +221,8 @@ nav ul li a:hover {
     font-size: 2.5vh;
     color: black;
 }
-#div_resultado{
-    color: #0057B6;;
+#div_jogo{
+    color: white;;
     text-align: center;
-    margin: 2vh auto;
-    width: 13vw; 
-    border-radius: 1vh;
-    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 1);
-    background-color: #0057B6;
-    margin-left: 45vw;
+    background-color: red;
 }

@@ -60,7 +60,7 @@ function assistencias() {
     const fkUsuario = sessionStorage.ID_USUARIO
 
     if (nome === "" || sobrenome === "" || isNaN(assistencia)) {
-        div_resultado.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de assistência.`;
+        div_treino.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de assistência.`;
     } else {
         const jogador = nome + " " + sobrenome;
         let chart = Chart.getChart('myChart1');

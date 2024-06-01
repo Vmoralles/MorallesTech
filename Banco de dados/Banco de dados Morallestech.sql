@@ -17,9 +17,16 @@ dtJogo datetime,
 competicao varchar(100),
 fkUsuario int,
 constraint fkUsuario foreign key (fkUsuario) references Usuario(idUsuario));
-
 insert into jogo values
-(1, "Ministerio X Trevo","2024-05-25 19:00:00", "Copa Noturna", default);
+(1, "Ministerio X Rb P.S.A","2024-05-15 19:00:00", "Copa Noturna", default),
+(2, "Ministerio X America FC P.S.A","2024-05-18 19:00:00", "Copa Noturna", default),
+(3, "Ministerio X Fluminense S.C P.S.A","2024-05-25 19:00:00", "Copa Noturna", default),
+(4, "Ministerio X Trevo","2024-05-29 19:00:00", "Copa Noturna", default),
+(5, "Ministerio X Selecionados F.C","2024-06-02 19:00:00", "Copa Noturna", default),
+(6, "Ministerio X JD Mazza","2024-06-09 19:00:00", "Copa Noturna", default),
+(7, "Ministerio X Fluminense S.C P.S.A","2024-06-13 19:00:00", "Copa Noturna", default),
+(8, "Ministerio X Trevo","2024-06-17 19:00:00", "Copa Noturna", default);
+
 
 create table estatisticas(
 fkUsuario int,
