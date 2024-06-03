@@ -46,11 +46,9 @@ function buscarUltimasMedidasMaestro(req, res) {
 
     const limite_linhas = 7;
 
-    var idMaestro = req.params.idMaestro;
-
     console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    maestroModel.buscarUltimasMedidasMaestro(idMaestro, limite_linhas).then(function (resultado) {
+    maestroModel.buscarUltimasMedidasMaestro(limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -64,27 +62,9 @@ function buscarUltimasMedidasMaestro(req, res) {
 }
 
 
-function buscarMedidasEmTempoRealMaestro(req, res) {
 
-    var idMaestro = req.params.idMaestro;
-
-    console.log(`Recuperando medidas em tempo real`);
-
-    maestroModel.buscarMedidasEmTempoRealMaestro(idMaestro).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
 
 module.exports = {
     buscarUltimasMedidasMaestro,
-    buscarMedidasEmTempoRealMaestro,
     cadastrar
 }

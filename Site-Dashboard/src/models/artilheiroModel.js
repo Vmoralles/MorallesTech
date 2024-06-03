@@ -30,5 +30,4 @@ function cadastrar(nome, sobrenome, gol, fkUsuario) {
 module.exports = {
     cadastrar,
     buscarUltimasMedidasArtilheiro,
-    buscarMedidasEmTempoRealArtilheiro
 };

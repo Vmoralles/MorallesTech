@@ -71,13 +71,6 @@ function gols() {
                         elementoAtual.classList.remove("display-block")
                     }
                     elementoAtual.classList.add("display-none")
-
-                    // alterando estilo do botão
-                    let btnAtual = document.getElementById(`btn_gols${todosOsGraficos[i].id}`)
-                    if (btnAtual.classList.contains("btn-pink")) {
-                        btnAtual.classList.remove("btn-pink")
-                    }
-                    btnAtual.classList.add("btn-white")
                 }
             }
         }
@@ -193,7 +186,7 @@ function assistencias() {
                 console.log(`#ERRO: ${resposta}`);
 
             });
-        let proximaAtualizacao;
+
         window.onload = exibirEstatisticasDoUsuario();
         function exibirEstatisticasDoUsuario() {
             let maestros = {
@@ -211,7 +204,7 @@ function assistencias() {
 
         }
 
-        function exibirEstatisticas(idMaestro) {
+        function exibirEstatisticas() {
             let maestros = {
                 fkUsuario: fkUsuario,
                 idMaestro: idMaestros
@@ -223,49 +216,24 @@ function assistencias() {
 
             for (i = 0; i < todosOsGraficos.length; i++) {
                 // exibindo - ou não - o gráfico
-                if (todosOsGraficos[i].id != idMaestro) {
+                if (todosOsGraficos[i].id != maestros) {
                     let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
                     if (elementoAtual.classList.contains("display-block")) {
                         elementoAtual.classList.remove("display-block")
                     }
                     elementoAtual.classList.add("display-none")
-
-                    // alterando estilo do botão
-                    let btnAtual = document.getElementById(`btn_gols${todosOsGraficos[i].id}`)
-                    if (btnAtual.classList.contains("btn-pink")) {
-                        btnAtual.classList.remove("btn-pink")
-                    }
-                    btnAtual.classList.add("btn-white")
-                }
-            }
-
-            // exibindo - ou não - o gráfico
-            let graficoExibir = document.getElementById(`grafico${idMaestro}`);
-            if (graficoExibir) {
-                graficoExibir.classList.remove("display-none");
-                graficoExibir.classList.add("display-block");
-
-                // alterando estilo do botão
-                let btnExibir = document.getElementById(`btn_gols${idMaestro}`);
-                if (btnExibir) {
-                    btnExibir.classList.remove("btn-white");
-                    btnExibir.classList.add("btn-pink");
                 }
             }
         }
 
-        function obterDadosGrafico(idMaestro) {
+        function obterDadosGrafico() {
 
-            if (proximaAtualizacao != undefined) {
-                clearTimeout(proximaAtualizacao);
-            }
-
-            fetch(`/maestro/ultimas/${idMaestro}`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/maestro/ultimas`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                         resposta.reverse();
-                        plotarGrafico(resposta, idMaestro);
+                        plotarGrafico(resposta);
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
@@ -276,7 +244,7 @@ function assistencias() {
                 });
         }
 
-        function plotarGrafico(resposta, idMaestro) {
+        function plotarGrafico(resposta) {
 
             console.log('iniciando plotagem do gráfico...');
 
@@ -285,7 +253,7 @@ function assistencias() {
             let dados = {
                 labels: [],
                 datasets: [{
-                    label: 'Gols',
+                    label: 'Assistencias',
                     data: [],
                     borderWidth: 1
                 }]
@@ -298,8 +266,8 @@ function assistencias() {
             // Inserindo valores recebidos em estrutura para plotar o gráfico
             for (i = 0; i < resposta.length; i++) {
                 var registro = resposta[i];
-                dados.labels.push(registro.nome);
-                dados.datasets[0].data.push(registro.Gol);
+                dados.labels.push(registro.nome + " " + registro.sobrenome);
+                dados.datasets[0].data.push(registro.assistencia);
             }
 
             console.log('----------------------------------------------')
@@ -314,68 +282,14 @@ function assistencias() {
                 type: 'bar',
                 data: dados,
             };
-            const ctx = document.getElementById('myChart');
+            const ctx = document.getElementById('myChart1');
             // Adicionando gráfico criado em div na tela
             if (Chart.getChart(ctx)) {
                 // Destruir o gráfico existente antes de criar um novo
                 Chart.getChart(ctx).destroy();
             }
-            myChart = new Chart(ctx, config)
-
-            setTimeout(() => atualizarGrafico(idMaestro, dados, myChart)), 2000;
+            myChart1 = new Chart(ctx, config)
         }
-
-        function atualizarGrafico(idMaestro, dados, myChart) {
-
-
-
-            fetch(`/maestro/tempo-real/${idMaestro}`, { cache: 'no-store' }).then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (novoRegistro) {
-                        console.log(idMaestro)
-                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                        console.log(`Dados atuais do gráfico:`);
-                        console.log(dados);
-
-                        // let avisoCaptura = document.getElementById(`avisoCaptura${idJogo}`)
-                        // avisoCaptura.innerHTML = ""
-
-
-                        if (novoRegistro[0].nome == dados.labels[dados.labels.length - 1]) {
-                            console.log("---------------------------------------------------------------")
-                            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                            // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                            console.log("Horário do novo dado capturado:")
-                            console.log(novoRegistro[0])
-                            console.log("Horário do último dado capturado:")
-                            console.log(dados.labels[dados.labels.length - 1])
-                            console.log("---------------------------------------------------------------")
-                        } else {
-                            // tirando e colocando valores no gráfico
-                            dados.labels.shift(); // apagar o primeiro
-                            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                            dados.datasets[0].data.push(novoRegistro[0].assistencia); // incluir uma nova medida de umidade
-
-                            myChart.update();
-                        }
-
-                        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                        proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaestro, dados, myChart), 2000);
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idMaestro, dados, myChart), 2000);
-                }
-            })
-                .catch(function (error) {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
-
-        }
-
     }
     return false;
 }
