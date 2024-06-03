@@ -3,13 +3,22 @@ var router = express.Router();
 
 var entradaController = require("../controllers/entradaController");
 
-router.get("/ultimas/:idJogo", function (req, res) {
-    entradaController.buscarUltimasMedidas(req, res);
+router.get("/ultimas/:idJogoGol", function (req, res) {
+    entradaController.buscarUltimasMedidasGol(req, res);
 });
 
-router.get("/tempo-real/:idJogo", function (req, res) {
-    entradaController.buscarMedidasEmTempoReal(req, res);
+router.get("/ultimas/:idJogoAssistencia", function (req, res) {
+    entradaController.buscarUltimasMedidasAssistencia(req, res);
+});
+
+router.get("/tempo-real/:idJogoGol", function (req, res) {
+    entradaController.buscarMedidasEmTempoRealGol(req, res);
 })
+
+router.get("/tempo-real/:idJogoAssistencia", function (req, res) {
+    entradaController.buscarMedidasEmTempoRealAssistencia(req, res);
+})
+
 router.post("/cadastrar", function (req, res) {
     entradaController.cadastrar(req, res);
 })

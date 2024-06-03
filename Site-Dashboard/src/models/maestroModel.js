@@ -1,29 +1,27 @@
 var database = require("../database/config")
 
 
-function buscarUltimasMedidas(idMaestro, limite_linhas) {
+function buscarUltimasMedidasMaestro(limite_linhas) {
 
     var instrucaoSql = `SELECT 
-    qtdAssistencia as assistencia, 
-    sobrenome,
-    nome
-    FROM estatisticas
-    WHERE fkJogo = ${idMaestro}
-    ORDER BY id DESC LIMIT ${limite_linhas}`;
+    assistencia,
+    nome,
+    sobrenome
+    FROM treinoMaestro
+    ORDER BY idMaestro DESC LIMIT ${limite_linhas}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idMaestro) {
+function buscarMedidasEmTempoRealMaestro() {
 
     var instrucaoSql = `SELECT 
-    qtdAssistencia as assistencia, 
-    sobrenome,
-    nome
-    FROM estatisticas
-    WHERE fkJogo = ${idMaestro}
-    ORDER BY id DESC LIMIT 1`;
+    assistencia,
+    nome,
+    sobrenome
+    FROM treinoMaestro
+    ORDER BY idMaestro DESC LIMIT 1`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -46,6 +44,6 @@ function cadastrar(nome, sobrenome, assistencia, fkUsuario) {
 
 module.exports = {
     cadastrar,
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarUltimasMedidasMaestro,
+    buscarMedidasEmTempoRealMaestro
 };

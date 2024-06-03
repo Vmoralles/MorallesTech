@@ -1,29 +1,56 @@
 var database = require("../database/config")
 
-function buscarUltimasMedidas(idJogo, limite_linhas) {
+
+function buscarUltimasMedidasAssistencia(idJogoAssistencia, limite_linhasAssistencia) {
 
     var instrucaoSql = `SELECT 
     qtdAssistencia as assistencia, 
-    qtdGol as Gol,
     nome,
     sobrenome
     FROM estatisticas
-    WHERE fkJogo = ${idJogo}
-    ORDER BY idEsta DESC LIMIT ${limite_linhas}`;
+    WHERE fkJogo = ${idJogoAssistencia}
+    ORDER BY idEsta DESC LIMIT ${limite_linhasAssistencia}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idJogo) {
+function buscarUltimasMedidasGol(idJogoGol, limite_linhasGol) {
 
     var instrucaoSql = `SELECT 
-    qtdAssistencia as assistencia,
+    qtdGol as Gol,
+    nome,
+    sobrenome
+    FROM estatisticas
+    WHERE fkJogo = ${idJogoGol}
+    ORDER BY idEsta DESC LIMIT ${limite_linhasGol}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealGol(idJogoGol) {
+
+    var instrucaoSql = `SELECT 
     qtdGol as Gol, 
     nome,
     sobrenome
     FROM estatisticas
-    WHERE fkJogo = ${idJogo}
+    WHERE fkJogo = ${idJogoGol}
+    ORDER BY idEsta DESC LIMIT 1`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealAssistencia(idJogoAssistencia) {
+
+    var instrucaoSql = `SELECT 
+    qtdAssistencia as assistencia, 
+    nome,
+    sobrenome
+    FROM estatisticas
+    WHERE fkJogo = ${idJogoAssistencia}
     ORDER BY idEsta DESC LIMIT 1`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -45,6 +72,8 @@ function cadastrar(fkUsuario, fkJogo, idEsta, nome, sobrenome, assistencia, gol)
 
 module.exports = {
     cadastrar,
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarUltimasMedidasGol,
+    buscarMedidasEmTempoRealGol,
+    buscarUltimasMedidasAssistencia,
+    buscarMedidasEmTempoRealAssistencia
 };

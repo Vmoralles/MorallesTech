@@ -42,7 +42,7 @@ function cadastrar(req, res) {
 }
 
 
-function buscarUltimasMedidas(req, res) {
+function buscarUltimasMedidasArtilheiro(req, res) {
 
     const limite_linhas = 7;
 
@@ -50,7 +50,7 @@ function buscarUltimasMedidas(req, res) {
 
     console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-    artilheiroModel.buscarUltimasMedidas(idArtilheiro, limite_linhas).then(function (resultado) {
+    artilheiroModel.buscarUltimasMedidasArtilheiro(idArtilheiro, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -64,13 +64,13 @@ function buscarUltimasMedidas(req, res) {
 }
 
 
-function buscarMedidasEmTempoReal(req, res) {
+function buscarMedidasEmTempoRealArtilheiro(req, res) {
 
     var idArtilheiro = req.params.idArtilheiro;
 
     console.log(`Recuperando medidas em tempo real`);
 
-    artilheiroModel.buscarMedidasEmTempoReal(idArtilheiro).then(function (resultado) {
+    artilheiroModel.buscarMedidasEmTempoRealArtilheiro(idArtilheiro).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -84,7 +84,7 @@ function buscarMedidasEmTempoReal(req, res) {
 }
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal,
+    buscarUltimasMedidasArtilheiro,
+    buscarMedidasEmTempoRealArtilheiro,
     cadastrar
 }

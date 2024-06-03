@@ -9,7 +9,7 @@ function cadastrar(req, res) {
     var sobrenome = req.body.sobrenomeServer;
     var assistencia = req.body.assistenciaServer;
     var gol = req.body.golServer;
-  
+
 
 
 
@@ -32,7 +32,7 @@ function cadastrar(req, res) {
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        entradaModel.cadastrar(fkUsuario, fkJogo, idEsta, nome, sobrenome,assistencia,gol)
+        entradaModel.cadastrar(fkUsuario, fkJogo, idEsta, nome, sobrenome, assistencia, gol)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -50,16 +50,55 @@ function cadastrar(req, res) {
     }
 }
 
+function buscarMedidasEmTempoRealGol(req, res) {
 
-function buscarUltimasMedidas(req, res) {
+    var idJogoGol = req.params.idJogoGol;
 
-    const limite_linhas = 7;
+    console.log(`Recuperando medidas em tempo real`);
 
-    var idJogo = req.params.idJogo;
+    entradaModel.buscarMedidasEmTempoRealGol(idJogoGol).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
-    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+function buscarUltimasMedidasGol(req, res) {
 
-    entradaModel.buscarUltimasMedidas(idJogo, limite_linhas).then(function (resultado) {
+    const limite_linhasGol = 7;
+
+    var idJogoGol = req.params.idJogoGol;
+
+    console.log(`Recuperando as ultimas ${limite_linhasGol} medidas`);
+
+    entradaModel.buscarUltimasMedidasGol(idJogoGol, limite_linhasGol).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarUltimasMedidasAssistencia(req, res) {
+
+    const limite_linhasAssistencia = 7;
+
+    var idJogoAssistencia = req.params.idJogoAssistencia;
+
+    console.log(`Recuperando as ultimas ${limite_linhasAssistencia} medidas`);
+
+    entradaModel.buscarUltimasMedidasAssistencia(idJogoAssistencia, limite_linhasAssistencia).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -73,13 +112,14 @@ function buscarUltimasMedidas(req, res) {
 }
 
 
-function buscarMedidasEmTempoReal(req, res) {
 
-    var idJogo= req.params.idJogo;
+function buscarMedidasEmTempoRealAssistencia(req, res) {
+
+    var idJogoAssistencia = req.params.idJogoAssistencia;
 
     console.log(`Recuperando medidas em tempo real`);
 
-    entradaModel.buscarMedidasEmTempoReal(idJogo).then(function (resultado) {
+    entradaModel.buscarMedidasEmTempoRealAssistencia(idJogoAssistencia).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -93,7 +133,9 @@ function buscarMedidasEmTempoReal(req, res) {
 }
 
 module.exports = {
-    buscarUltimasMedidas,
-    buscarMedidasEmTempoReal,
+    buscarUltimasMedidasGol,
+    buscarUltimasMedidasAssistencia,
+    buscarMedidasEmTempoRealGol,
+    buscarMedidasEmTempoRealAssistencia,
     cadastrar
 }
