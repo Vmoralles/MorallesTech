@@ -26,7 +26,7 @@ function registrar() {
     // verificação telefone
     else if (telefone.length < 11 || telefone.length > 11) {
         div_alert.style.display = 'block';
-        div_alert.innerHTML = "O TELEFONE NÃO ESTA COMPLETO!"
+        div_alert.innerHTML = "O TELEFONE ESTA INCOMPLETO"
     }
     // verificação senha igual
     else if (senha != senhaConfirmada) {

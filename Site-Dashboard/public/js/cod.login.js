@@ -35,9 +35,7 @@ function entrar() {
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
                 sessionStorage.ID_USUARIO = json.idUsuario;
-                sessionStorage.FK_USUARIO = json.fkUsuario;
-                sessionStorage.FK_JOGO = json.fkJogo;
-                sessionStorage.ID_ESTA = json.idEsta;
+                sessionStorage.ARTILHEIRO = JSON.stringify(json.artilheiro)
 
                 setTimeout(function () {
                     window.location = "site_index.html";
