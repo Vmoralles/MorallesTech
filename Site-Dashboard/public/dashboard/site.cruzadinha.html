@@ -77,42 +77,31 @@
 </html>
 
 <script>
-    var special_words = ['CBF', 'VAR', 'COPA DO MUNDO', 'CAM', 'MÃO', 'Brasil', 'VASCO', 'Memória de Massa', 'DMA', 'CS', 'Adress Bus', 'Data Bus', 'I5', 'I7', 'Dual Core', 'Quad Core'];
+    var special_words = ['Pele', 'La Bombonera', 'Real Madrid', 'Uruguai', 'Goleiro', 'Neymar', 'Maracana', 'Kaka', 'Russia', 'Italia'];
 
     var questions_list = [
-        'Qual é a sigla Confederação Brasileira de Futebol?',
-        'Como é chamado o sistema de arbitragem auxiliado por vídeo no futebol?',
-        'Qual é o nome do principal torneio de futebol entre seleções nacionais, disputado a cada quatro anos?',
-        'Qual é a posição do jogador que é responsável por construir as jogadas no meio-campo e distribuir passes no futebol? (SIGLA)',
-        'Qual é a parte do corpo que um jogador de futebol não pode usar, exceto o goleiro dentro da área?',
-        'Qual é a seleção que mais ganhou copas do mundo',
-        'Qual time tem fama de time rebaixado no Brasil',
-        'Tipo de memória que precisa ter seu conteúdo copiado na RAM para poder ser executado pela CPU',
-        'Permite que periféricos acessem diretamente a RAM sem ocupar processamento',
-        'Também conhecido como Slave Select (SS). Usado para selecionar um ou um conjunto de circuitos que estão conectados no computador',
-        'Grupo de linhas ou trilhas usadas para se referir a um endereço físico na memória. O número de trilhas determina a quantidade de endereços na memória física',
-        'Também chamado de Memory Bus. É responsável para carregar os dados.',
-        'Modelo de processador desenvolvido pela Intel qu teve sua primeira versão lançada em setembro de 2009',
-        'Modelo de processador desenvolvido pela Intel qu teve sua primeira versão lançada em novembro de 2008',
-        'Tipo de processador que possui dois processadores ou melhor dizendo ‘dois centros, núcleos ou cores de execução‘ no mesmo circuito integrado.  Cada core tem sua própria memória cash e controlador o que permite que funcione mais efetivamente do que um processador single',
-        'Segue o mesmo princípio de um dual-core, mas agora em teoria tem o dobro da capacidade de processamento'
+        'Jogador que marcou mais gols na história da Copa do Mundo.',
+        'Nome do estádio mais famoso de Buenos Aires, Argentina?',
+        'Maior rival do Barcelona?',
+        'O país que sediou a primeira Copa do Mundo em 1930?',
+        'Posição do jogador que normalmente defende o gol?',
+        'O jogador mais caro da história do futebol?',
+        'Qual é o nome do estádio que sediou a final da Copa do Mundo de 2014 no Brasil?',
+        'Qual é o único jogador a ganhar o prêmio de melhor do mundo da FIFA enquanto jogava pelo Milan e pelo Real Madrid??',
+        'Qual país sediou a Copa do Mundo de 2018?',
+        'Qual seleção nacional ganhou a Copa do Mundo de 2006?'
     ];
 
-    var filledCell = [2, 20, 38, 133, 134, 135, 59, 77, 95, 113, 131, 149,
-        167, 185, 203, 221, 239, 257, 275, 59, 60, 61, 272, 290, 308, 236,
-        254, 272, 290, 308, 116, 134, 152, 170, 188, 27, 45, 63, 81, 99, 117,
-        135, 153, 171, 189, 207, 225, 243, 261, 279, 297, 203, 204, 205, 312,
-        313, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 187, 20, 223,
-        241, 259, 277, 295, 313, 117, 118, 113, 114, 37, 38, 39, 40, 41, 42,
-        43, 44, 45, 3, 21, 39, 57, 75, 93, 111, 129, 147];
+    var filledCell = [2, 3, 4, 5, 22, 40, 58, 76, 94, 112, 130, 148, 166, 184, 202, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 85, 103, 121, 139, 157, 175, 129, 131, 132, 133, 134, 135, 207, 225, 243, 261, 279, 297, 315, 120, 121, 122, 123, 124, 125, 277, 278, 279, 280, 281, 114, 132, 150, 168, 186, 282, 204, 264, 300, 318, 282
+    ];
 
-    var firstIndex = [2, 133, 59, 59, 272, 236, 116, 27, 203, 312, 270, 187, 117, 113, 37, 3];
+    var firstIndex = [2, 4, 184, 85, 129, 114, 189, 264, 120, 277];
 
     var word = {
 
         word1: {
             letter: special_words[0].split(''),
-            position: [2, 20, 38],
+            position: [2, 3, 4, 5],
             write: function () {
 
                 for (i in word.word1.letter) {
@@ -121,12 +110,12 @@
                     findCell.innerHTML = word.word1.letter[i];
                     console.log(word.word1.letter[i]);
                 }
-                cell_2.innerHTML = '<span style="color: red; font-size:10px">1</span>C';
+                cell_2.innerHTML = '<span style="color: red; font-size:10px">1</span>P';
             }
         },
         word2: {
             letter: special_words[1].split(''),
-            position: [133, 134, 135],
+            position: [4, 22, 40, 58, 76, 94, 112, 130, 148, 166, 184, 202],
             write: function () {
                 for (i in word.word2.letter) {
                     var findCell = document.querySelector(`#cell_${word.word2.position[i]}`);
@@ -134,13 +123,13 @@
                     findCell.innerHTML = word.word2.letter[i];
                     console.log(word.word2.letter[i]);
                 }
-                cell_133.innerHTML = '<span style="color: red; font-size:10px">2</span>V';
+                cell_4.innerHTML = '<span style="color: red; font-size:10px">2</span>L';
 
             }
         },
         word3: {
             letter: special_words[2].split(''),
-            position: [59, 77, 95, 113, 131, 149, 167, 185, 203, 221, 239, 257, 275],
+            position: [184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194],
             write: function () {
                 for (i in word.word3.letter) {
                     var findCell = document.querySelector(`#cell_${word.word3.position[i]}`);
@@ -148,13 +137,12 @@
                     findCell.innerHTML = word.word3.letter[i];
                     console.log(word.word3.letter[i]);
                 }
-                cell_59.innerHTML = '<span style="color: red; font-size:10px">3_4</span>C';
-                cell_113.innerHTML = '<span style="color: red; font-size:10px">14</span>A';
+                cell_184.innerHTML = '<span style="color: red; font-size:10px">3</span>R';
             }
         },
         word4: {
             letter: special_words[3].split(''),
-            position: [59, 60, 61],
+            position: [85, 103, 121, 139, 157, 175, 193],
             write: function () {
                 for (i in word.word4.letter) {
                     var findCell = document.querySelector(`#cell_${word.word4.position[i]}`);
@@ -162,12 +150,12 @@
                     findCell.innerHTML = word.word4.letter[i];
                     console.log(word.word4.letter[i]);
                 }
-                cell_59.innerHTML = '<span style="color: red; font-size:10px">3_4</span>C';
+                cell_85.innerHTML = '<span style="color: red; font-size:10px">4</span>U';
             }
         },
         word5: {
             letter: special_words[4].split(''),
-            position: [272, 290, 308],
+            position: [129, 130, 131, 132, 133, 134, 135],
             write: function () {
                 for (i in word.word5.letter) {
                     var findCell = document.querySelector(`#cell_${word.word5.position[i]}`);
@@ -175,12 +163,12 @@
                     findCell.innerHTML = word.word5.letter[i];
                     console.log(word.word5.letter[i]);
                 }
-                cell_272.innerHTML = '<span style="color: red; font-size:10px">5</span>R';
+                cell_129.innerHTML = '<span style="color: red; font-size:10px">5</span>G';
             }
         },
         word6: {
             letter: special_words[5].split(''),
-            position: [236, 254, 272, 290, 308],
+            position: [114, 132, 150, 168, 186, 204],
             write: function () {
                 for (i in word.word6.letter) {
                     var findCell = document.querySelector(`#cell_${word.word6.position[i]}`);
@@ -188,12 +176,12 @@
                     findCell.innerHTML = word.word6.letter[i];
                     console.log(word.word6.letter[i]);
                 }
-                cell_236.innerHTML = '<span style="color: red; font-size:10px">6</span>E';
+                cell_144.innerHTML = '<span style="color: red; font-size:10px">6</span>N';
             }
         },
         word7: {
             letter: special_words[6].split(''),
-            position: [116, 134, 152, 170, 188],
+            position: [189, 207, 225, 243, 261, 279, 297, 315],
             write: function () {
                 for (i in word.word7.letter) {
                     var findCell = document.querySelector(`#cell_${word.word7.position[i]}`);
@@ -201,12 +189,12 @@
                     findCell.innerHTML = word.word7.letter[i];
                     console.log(word.word7.letter[i]);
                 }
-                cell_116.innerHTML = '<span style="color: red; font-size:10px">7</span>F';
+                cell_189.innerHTML = '<span style="color: red; font-size:10px">7</span>M';
             }
         },
         word8: {
             letter: special_words[7].split(''),
-            position: [27, 45, 63, 81, 99, 117, 135, 153, 171, 189, 207, 225, 243, 261, 279, 297],
+            position: [264, 282, 300, 318],
             write: function () {
                 for (i in word.word8.letter) {
                     var findCell = document.querySelector(`#cell_${word.word8.position[i]}`);
@@ -214,16 +202,13 @@
                     findCell.innerHTML = word.word8.letter[i];
                     console.log(word.word8.letter[i]);
                 }
-                cell_27.innerHTML = '<span style="color: red; font-size:10px">8</span>M';
-                cell_117.innerHTML = '<span style="color: red; font-size:10px">13</span>i';
-                cell_153.innerHTML = '-';
-                cell_207.innerHTML = '-';
+                cell_264.innerHTML = '<span style="color: red; font-size:10px">8</span>K';
 
             }
         },
         word9: {
             letter: special_words[8].split(''),
-            position: [203, 204, 205, 312, 313],
+            position: [120, 121, 122, 123, 124, 125],
             write: function () {
                 for (i in word.word9.letter) {
                     var findCell = document.querySelector(`#cell_${word.word9.position[i]}`);
@@ -231,12 +216,12 @@
                     findCell.innerHTML = word.word9.letter[i];
                     console.log(word.word9.letter[i]);
                 }
-                cell_203.innerHTML = '<span style="color: red; font-size:10px">9</span>D';
+                cell_120.innerHTML = '<span style="color: red; font-size:10px">9</span>R';
             }
         },
         word10: {
             letter: special_words[9].split(''),
-            position: [312, 313],
+            position: [277, 278, 279, 280, 281, 282],
             write: function () {
                 for (i in word.word10.letter) {
                     var findCell = document.querySelector(`#cell_${word.word10.position[i]}`);
@@ -244,91 +229,9 @@
                     findCell.innerHTML = word.word10.letter[i];
                     console.log(word.word10.letter[i]);
                 }
-                cell_312.innerHTML = '<span style="color: red; font-size:10px">10</span>C';
+                cell_277.innerHTML = '<span style="color: red; font-size:10px">10</span>I';
             }
         },
-        word11: {
-            letter: special_words[10].split(''),
-            position: [270, 271, 272, 273, 274, 275, 276, 277, 278, 279],
-            write: function () {
-                for (i in word.word11.letter) {
-                    var findCell = document.querySelector(`#cell_${word.word11.position[i]}`);
-
-                    findCell.innerHTML = word.word11.letter[i];
-                    console.log(word.word11.letter[i]);
-                }
-                cell_270.innerHTML = '<span style="color: red; font-size:10px">11</span>A';
-                cell_276.innerHTML = '-';
-            }
-        },
-        word12: {
-            letter: special_words[11].split(''),
-            position: [187, 205, 223, 241, 259, 277, 295, 313, 117, 118],
-            write: function () {
-                for (i in word.word12.letter) {
-                    var findCell = document.querySelector(`#cell_${word.word12.position[i]}`);
-
-                    findCell.innerHTML = word.word12.letter[i];
-                    console.log(word.word12.letter[i]);
-                }
-                cell_187.innerHTML = '<span style="color: red; font-size:10px">12</span>D';
-                cell_259.innerHTML = '-';
-            }
-        },
-        word13: {
-            letter: special_words[12].split(''),
-            position: [117, 118],
-            write: function () {
-                for (i in word.word13.letter) {
-                    var findCell = document.querySelector(`#cell_${word.word13.position[i]}`);
-
-                    findCell.innerHTML = word.word13.letter[i];
-                    console.log(word.word13.letter[i]);
-                }
-                cell_117.innerHTML = '<span style="color: red; font-size:10px">13</span>I';
-            }
-        },
-        word14: {
-            letter: special_words[13].split(''),
-            position: [113, 114],
-            write: function () {
-                for (i in word.word14.letter) {
-                    var findCell = document.querySelector(`#cell_${word.word14.position[i]}`);
-
-                    findCell.innerHTML = word.word14.letter[i];
-                    console.log(word.word14.letter[i]);
-                }
-                cell_113.innerHTML = '<span style="color: red; font-size:10px">14</span>I';
-            }
-        },
-        word15: {
-            letter: special_words[14].split(''),
-            position: [37, 38, 39, 40, 41, 42, 43, 44, 45],
-            write: function () {
-                for (i in word.word15.letter) {
-                    var findCell = document.querySelector(`#cell_${word.word15.position[i]}`);
-
-                    findCell.innerHTML = word.word15.letter[i];
-                    console.log(word.word15.letter[i]);
-                }
-                cell_37.innerHTML = '<span style="color: red; font-size:10px">15</span>D';
-                cell_41.innerHTML = '-';
-            }
-        },
-        word16: {
-            letter: special_words[15].split(''),
-            position: [3, 21, 39, 57, 75, 93, 111, 129, 147],
-            write: function () {
-                for (i in word.word16.letter) {
-                    var findCell = document.querySelector(`#cell_${word.word16.position[i]}`);
-
-                    findCell.innerHTML = word.word16.letter[i];
-                    console.log(word.word16.letter[i]);
-                }
-                cell_3.innerHTML = '<span style="color: red; font-size:10px">16</span>Q';
-                cell_75.innerHTML = '-';
-            }
-        }
     };
 
     var widthTable = 18;
@@ -461,10 +364,6 @@
             var paintIndex_cell = document.getElementById(`cell_${firstIndex[initial]}`);
 
             paintIndex_cell.innerHTML = `<span style="color: red; font-size:10px">${initial + 1}</span>`;
-
-            if (initial == 2 || initial == 3) {
-                paintIndex_cell.innerHTML = `<span style="color: red; font-size:10px">3_4</span>`;
-            }
         }
     }
 

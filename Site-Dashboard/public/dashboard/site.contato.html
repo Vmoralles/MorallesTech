@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.contato.css">
+    <link rel="shortcut icon" href="assent/Escudo.png" type="image/x-icon">
+    <title>Ministério | Contato</title>
+</head>
+
+<body>
+    <header>
+        <div id="logo-Ministerio">
+            <a href="../site_index.html">
+                <img src="../assent/Escudo.png" alt="escudo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../site_index.html">INICIO</a></li>
+                <li><a href="site.jogos.html">JOGOS</a></li>
+                <li><a href="site.treino.html">TREINOS</a></li>
+            </ul>
+        </nav>
+        <div id="logo-Sair">
+            <a href="../site.login.html">
+                <img src="../assent/sair (1).png" alt="sair">
+            </a>
+        </div>
+    </header>
+
+    <div class="pagina-contato">
+
+        <h1 class="titulo">Fale Conosco</h1>
+        <h2 class="subtitulo">Preencha o formulário para entrar em contato!</h2>
+
+        <div class="container">
+            <form method="post">
+            <div class="box">
+
+                <div class="esquerda">
+                    <img src="../assent/Escudo.png" alt="">
+                </div>
+                
+                    <div class="direita">
+                        <div class="input-container">
+                            <label for="label_nome">Nome Completo</label>
+                            <input type="text" required id="input_nome" placeholder="Digite o seu nome completo">
+                        </div>
+
+                        <div class="input-container">
+                            <label for="label_email">Email</label>
+                            <input type="email" required id="input_email" placeholder="Digite o seu email">
+                        </div>
+
+                        <div class="input-container">
+                            <label for="label_assunto">Assunto</label>
+                            <input type="text" required id="input_assunto" placeholder="Digite o assunto">
+                        </div>
+                        <div class="input-container">
+                            <label for="label_problema">Escreva mais sobre o seu problema</label>
+                            <input type="text" required id="input_problema" placeholder="Descreva seu problema...">
+                        </div>
+                        <div class="input-container">
+                            <button onclick="enviar()" class="botao-enviar">Enviar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <footer>
+        © 2024 MorallesTech. Todos os direitos reservados.
+    </footer>
+</body>
+
+</html>
+
+<script src="js/cod.contato.js"></script>
