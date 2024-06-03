@@ -56,7 +56,7 @@
             <br>
             <div style="display: none" id="div_questions">
                 <center>
-                    <span id="span_questionText">Vamos encontrar as esferas do dragao</span>
+                    <span id="span_questionText"></span>
                     <input type="text" id="input_answer" placeholder="Sua Reposta"><br>
                     <button id="button_verify" onclick="verify()" class="botao-2">Verificar</button>
                 </center>
@@ -77,10 +77,10 @@
 </html>
 
 <script>
-    var special_words = ['Pele', 'La Bombonera', 'Real Madrid', 'Uruguai', 'Goleiro', 'Neymar', 'Maracana', 'Kaka', 'Russia', 'Italia'];
+    var special_words = ['Pelé', 'La Bombonera', 'Real Madrid', 'Uruguai', 'Goleiro', 'Neymar', 'Maracanã', 'Kaká', 'Rússia', 'Itália'];
 
     var questions_list = [
-        'Jogador que marcou mais gols na história da Copa do Mundo.',
+        'Jogador que marcou mais gols na história.',
         'Nome do estádio mais famoso de Buenos Aires, Argentina?',
         'Maior rival do Barcelona?',
         'O país que sediou a primeira Copa do Mundo em 1930?',
@@ -176,7 +176,6 @@
                     findCell.innerHTML = word.word6.letter[i];
                     console.log(word.word6.letter[i]);
                 }
-                cell_144.innerHTML = '<span style="color: red; font-size:10px">6</span>N';
             }
         },
         word7: {
@@ -292,24 +291,6 @@
         }
         else if (cont_correctAnswer == 10) {
             word.word10.write();
-        }
-        else if (cont_correctAnswer == 11) {
-            word.word11.write();
-        }
-        else if (cont_correctAnswer == 12) {
-            word.word12.write();
-        }
-        else if (cont_correctAnswer == 13) {
-            word.word13.write();
-        }
-        else if (cont_correctAnswer == 14) {
-            word.word14.write();
-        }
-        else if (cont_correctAnswer == 15) {
-            word.word15.write();
-        }
-        else if (cont_correctAnswer == 16) {
-            word.word16.write();
 
             setTimeout(function () {
                 destroyGrid();

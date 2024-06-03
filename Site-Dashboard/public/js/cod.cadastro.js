@@ -34,7 +34,7 @@ function registrar() {
         div_alert.innerHTML = "AS SENHAS PRECISAM SER IGUAIS!"
     }
     // verificação email
-    else if (email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+    else if (email.indexOf("@") == -1 || email.indexOf(".") == -1 || email.indexOf("gmail") == -1 ) {
         div_alert.style.display = 'block';
         div_alert.innerHTML = "DIGITE UM E-MAIL VÁLIDO!"
     }
@@ -44,7 +44,7 @@ function registrar() {
         div_alert.innerHTML = "A SENHA TEM QUE TER NO MINIMO 8 CARACTERES"
     }
     // verificação de caracter especial + letra maiuscula + for
-    else if(!senha.indexOf(caracteresEspeciais)) {
+    else if(senha.indexOf(caracteresEspeciais) || senha.indexOf(letrasMaiusculas)) {
         for (let senhaVerificiar = 0; senhaVerificiar < senha.length; senhaVerificiar++) {
             let char = senha[senhaVerificiar]
             if (caracteresEspeciais.indexOf(char) != -1) {

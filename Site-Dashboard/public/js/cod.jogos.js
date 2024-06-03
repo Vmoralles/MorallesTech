@@ -15,37 +15,6 @@ function gols() {
         div_jogo.innerHTML = ` Você não é o ${nomeSession} ${sobrenomeSession}`
     } else {
 
-        fetch("/entrada/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                fkUsuarioServer: fkUsuario,
-                fkJogoServer: fkJogo,
-                idEstaServer: idEsta,
-                nomeServer: nome,
-                sobrenomeServer: sobrenome,
-                golServer: gol,
-                assistenciaServer: assistencia
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if (resposta.ok) {
-                    console.log("Funcionou")
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-
-            });
-
         let proximaAtualizacao;
         window.onload = exibirEstatisticasDoUsuario();
         function exibirEstatisticasDoUsuario() {
@@ -115,7 +84,7 @@ function gols() {
                 clearTimeout(proximaAtualizacao);
             }
 
-            fetch(`/entrada/ultimas/${idJogoGol}`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/entrada/ultimasGol/${idJogoGol}`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -154,7 +123,7 @@ function gols() {
             // Inserindo valores recebidos em estrutura para plotar o gráfico
             for (i = 0; i < resposta.length; i++) {
                 var registro = resposta[i];
-                dados.labels.push(registro.nome);
+                dados.labels.push(registro.nome + " " + registro.sobrenome);
                 dados.datasets[0].data.push(registro.Gol);
             }
 
@@ -177,62 +146,40 @@ function gols() {
                 Chart.getChart(ctx).destroy();
             }
             myChart = new Chart(ctx, config)
-
-            setTimeout(() => atualizarGrafico(idJogoGol, dados, myChart)), 2000;
         }
 
-        function atualizarGrafico(idJogoGol, dados, myChart) {
+        fetch("/entrada/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                fkUsuarioServer: fkUsuario,
+                fkJogoServer: fkJogo,
+                idEstaServer: idEsta,
+                nomeServer: nome,
+                sobrenomeServer: sobrenome,
+                golServer: gol,
+                assistenciaServer: assistencia
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-
-
-            fetch(`/entrada/tempo-real/${idJogoGol}`, { cache: 'no-store' }).then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (novoRegistro) {
-                        console.log(idJogoGol)
-                        // obterDadosGrafico(idJogo);
-                        // alertar(novoRegistro, idAquario);
-                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                        console.log(`Dados atuais do gráfico:`);
-                        console.log(dados);
-
-                        // let avisoCaptura = document.getElementById(`avisoCaptura${idJogo}`)
-                        // avisoCaptura.innerHTML = ""
-
-
-                        if (novoRegistro[0].nome == dados.labels[dados.labels.length - 1]) {
-                            console.log("---------------------------------------------------------------")
-                            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                            // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                            console.log("Horário do novo dado capturado:")
-                            console.log(novoRegistro[0])
-                            console.log("Horário do último dado capturado:")
-                            console.log(dados.labels[dados.labels.length - 1])
-                            console.log("---------------------------------------------------------------")
-                        } else {
-                            // tirando e colocando valores no gráfico
-                            dados.labels.shift(); // apagar o primeiro
-                            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                            dados.datasets[0].data.push(novoRegistro[0].gol); // incluir uma nova medida de umidade
-
-                            myChart.update();
-                        }
-
-                        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                        proximaAtualizacao = setTimeout(() => atualizarGrafico(idJogoGol, dados, myChart), 2000);
-                    });
+                if (resposta.ok) {
+                    console.log("Funcionou")
                 } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idJogoGol, dados, myChart), 2000);
+                    throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
-                .catch(function (error) {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
 
-        }
+            });
+
+
 
     }
     return false;
@@ -256,39 +203,7 @@ function assistencias() {
     } else if (sobrenome != sobrenomeSession || nome != nomeSession) {
         div_jogo.innerHTML += ` Você não é o ${nomeSession} ${sobrenomeSession}`
     } else {
-        fetch("/entrada/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                fkUsuarioServer: fkUsuario,
-                fkJogoServer: fkJogo,
-                idEstaServer: idEsta,
-                nomeServer: nome,
-                sobrenomeServer: sobrenome,
-                golServer: gol,
-                assistenciaServer: assistencia
 
-
-
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if (resposta.ok) {
-                    console.log("Funcionou")
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-
-            });
         let proximaAtualizacao;
         window.onload = exibirEstatisticasDoUsuario1();
         function exibirEstatisticasDoUsuario1() {
@@ -358,7 +273,7 @@ function assistencias() {
                 clearTimeout(proximaAtualizacao);
             }
 
-            fetch(`/entrada/ultimas/${idJogoAssistencia}`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/entrada/ultimasAssistencia/${idJogoAssistencia}`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
                         console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -397,8 +312,8 @@ function assistencias() {
             // Inserindo valores recebidos em estrutura para plotar o gráfico
             for (i = 0; i < resposta.length; i++) {
                 var registro = resposta[i];
-                dados.labels.push(registro.nome);
-                dados.datasets[0].data.push(registro.Assistencia);
+                dados.labels.push(registro.nome + " " + registro.sobrenome);
+                dados.datasets[0].data.push(registro.assistencia);
             }
 
             console.log('----------------------------------------------')
@@ -420,62 +335,41 @@ function assistencias() {
                 Chart.getChart(ctx1).destroy();
             }
             myChart1 = new Chart(ctx1, config)
-
-            setTimeout(() => atualizarGrafico1(idJogoAssistencia, dados, myChart1)), 2000;
         }
-
-        function atualizarGrafico1(idJogoAssistencia, dados, myChart1) {
-
-
-
-            fetch(`/entrada/tempo-real/${idJogoAssistencia}`, { cache: 'no-store' }).then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (novoRegistro) {
-                        console.log(idJogoAssistencia)
-                        // obterDadosGrafico(idJogo);
-                        // alertar(novoRegistro, idAquario);
-                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                        console.log(`Dados atuais do gráfico:`);
-                        console.log(dados);
-
-                        // let avisoCaptura = document.getElementById(`avisoCaptura${idJogo}`)
-                        // avisoCaptura.innerHTML = ""
+        fetch("/entrada/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                fkUsuarioServer: fkUsuario,
+                fkJogoServer: fkJogo,
+                idEstaServer: idEsta,
+                nomeServer: nome,
+                sobrenomeServer: sobrenome,
+                golServer: gol,
+                assistenciaServer: assistencia
 
 
-                        if (novoRegistro[0].nome == dados.labels[dados.labels.length - 1]) {
-                            console.log("---------------------------------------------------------------")
-                            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                            // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                            console.log("Horário do novo dado capturado:")
-                            console.log(novoRegistro[0])
-                            console.log("Horário do último dado capturado:")
-                            console.log(dados.labels[dados.labels.length - 1])
-                            console.log("---------------------------------------------------------------")
-                        } else {
-                            // tirando e colocando valores no gráfico
-                            dados.labels.shift(); // apagar o primeiro
-                            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-                            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                            dados.datasets[0].data.push(novoRegistro[0].assistencia); // incluir uma nova medida de umidade
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
 
-                            myChart1.update();
-                        }
-
-                        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                        proximaAtualizacao = setTimeout(() => atualizarGrafico1(idJogoAssistencia, dados, myChart1), 2000);
-                    });
+                if (resposta.ok) {
+                    console.log("Funcionou")
                 } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico1(idJogoAssistencia, dados, myChart1), 2000);
+                    throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
-                .catch(function (error) {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
 
-        }
+            });
+
         return false;
     }
 }
