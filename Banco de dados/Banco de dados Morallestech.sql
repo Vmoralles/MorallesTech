@@ -44,7 +44,7 @@ create table contato(
 idContato int auto_increment,
 fkUsuario int,
 nome varchar(255),
-email  varchar(255)unique,
+email  varchar(255),
 assunto varchar(255),
 problema varchar(255),
 constraint pkComposta primary key (idContato, fkUsuario),
