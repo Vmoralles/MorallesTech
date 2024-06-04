@@ -9,11 +9,6 @@ function cadastrar(req, res) {
     var sobrenome = req.body.sobrenomeServer;
     var assistencia = req.body.assistenciaServer;
     var gol = req.body.golServer;
-
-
-
-
-
     // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -48,25 +43,6 @@ function cadastrar(req, res) {
                 }
             );
     }
-}
-
-function buscarMedidasEmTempoRealGol(req, res) {
-
-    var idJogoGol = req.params.idJogoGol;
-
-    console.log(`Recuperando medidas em tempo real`);
-
-    entradaModel.buscarMedidasEmTempoRealGol(idJogoGol).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
 }
 
 function buscarUltimasMedidasGol(req, res) {
@@ -111,31 +87,8 @@ function buscarUltimasMedidasAssistencia(req, res) {
     });
 }
 
-
-
-function buscarMedidasEmTempoRealAssistencia(req, res) {
-
-    var idJogoAssistencia = req.params.idJogoAssistencia;
-
-    console.log(`Recuperando medidas em tempo real`);
-
-    entradaModel.buscarMedidasEmTempoRealAssistencia(idJogoAssistencia).then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
-
 module.exports = {
     buscarUltimasMedidasGol,
     buscarUltimasMedidasAssistencia,
-    buscarMedidasEmTempoRealGol,
-    buscarMedidasEmTempoRealAssistencia,
     cadastrar
 }

@@ -14,9 +14,6 @@ function gols() {
     } else if (sobrenome != sobrenomeSession || nome != nomeSession) {
         div_jogo.innerHTML = ` Você não é o ${nomeSession} ${sobrenomeSession}`
     } else {
-
-
-
         fetch("/entrada/cadastrar", {
             method: "POST",
             headers: {
@@ -47,14 +44,9 @@ function gols() {
                 console.log(`#ERRO: ${resposta}`);
 
             });
-
-
-
     }
     return false;
 }
-
-
 
 function assistencias() {
     const nome = document.getElementById('input_nome_assistencia').value.trim();
@@ -72,8 +64,6 @@ function assistencias() {
     } else if (sobrenome != sobrenomeSession || nome != nomeSession) {
         div_jogo.innerHTML += ` Você não é o ${nomeSession} ${sobrenomeSession}`
     } else {
-
-
         fetch("/entrada/cadastrar", {
             method: "POST",
             headers: {
@@ -89,9 +79,6 @@ function assistencias() {
                 sobrenomeServer: sobrenome,
                 golServer: gol,
                 assistenciaServer: assistencia
-
-
-
             }),
         })
             .then(function (resposta) {
@@ -107,28 +94,18 @@ function assistencias() {
                 console.log(`#ERRO: ${resposta}`);
 
             });
-
         return false;
     }
 }
 
 function atualizarGol() {
-    const nome = document.getElementById('input_nome_gol').value.trim().toLowerCase();
-    const sobrenome = document.getElementById('input_sobrenome_gol').value.trim().toLowerCase();
-    const gol = parseInt(document.getElementById('input_gols').value);
-    const fkJogo = parseInt(document.getElementById('input_jogo').value);
-    const assistencia = 0
-    const fkUsuario = sessionStorage.ID_USUARIO
-    let idEsta = btn_gols.value = 1
-    const nomeSession = sessionStorage.NOME_USUARIO.toLowerCase()
-    const sobrenomeSession = sessionStorage.SOBRENOME_USUARIO.toLowerCase()
-    let proximaAtualizacao;
+
     window.onload = exibirEstatisticasDoUsuario();
     function exibirEstatisticasDoUsuario() {
         let estatisticas = {
-            fkUsuario: fkUsuario,
-            fkJogo: fkJogo,
-            idEstatisticas: idEsta
+            fkUsuario: sessionStorage.ID_USUARIO,
+            fkJogo: input_jogo.value,
+            idEstatisticas: btn_gols.value = 1
         };
 
         sessionStorage.setItem('ESTATISTICAS', JSON.stringify(estatisticas));
@@ -136,60 +113,9 @@ function atualizarGol() {
         console.log(estatisticas)
 
         obterDadosGrafico(estatisticas.fkJogo);
-
-        exibirEstatisticas(estatisticas);
-
-    }
-
-    function exibirEstatisticas(idJogoGol) {
-        let estatisticas = {
-            fkUsuario: fkUsuario,
-            fkJogo: fkJogo,
-            idEstatisticas: idEsta
-        };
-
-        // Converta o objeto JSON em uma string JSON e armazene na sessionStorage
-        sessionStorage.setItem('ESTATISTICAS', JSON.stringify(estatisticas));
-        let todosOsGraficos = estatisticas;
-
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idJogoGol) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
-
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btn_gols${todosOsGraficos[i].id}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
-            }
-        }
-
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idJogoGol}`);
-        if (graficoExibir) {
-            graficoExibir.classList.remove("display-none");
-            graficoExibir.classList.add("display-block");
-
-            // alterando estilo do botão
-            let btnExibir = document.getElementById(`btn_gols${idJogoGol}`);
-            if (btnExibir) {
-                btnExibir.classList.remove("btn-white");
-                btnExibir.classList.add("btn-pink");
-            }
-        }
     }
 
     function obterDadosGrafico(idJogoGol) {
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
 
         fetch(`/entrada/ultimasGol/${idJogoGol}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -258,83 +184,24 @@ function atualizarGol() {
 }
 
 function atualizarAssistencia() {
-    const nome = document.getElementById('input_nome_assistencia').value.trim();
-    const sobrenome = document.getElementById('input_sobrenome_assistencia').value.trim();
-    const assistencia = parseInt(document.getElementById('input_assistencia').value);
-    const fkJogo = parseInt(document.getElementById('input_jogo_assistencia').value);
-    const gol = 0
-    const fkUsuario = sessionStorage.ID_USUARIO
-    let idEsta = btn_assistencia.value + 2
-    const nomeSession = sessionStorage.NOME_USUARIO.toLowerCase()
-    const sobrenomeSession = sessionStorage.SOBRENOME_USUARIO.toLowerCase()
-    let proximaAtualizacao;
+
     window.onload = exibirEstatisticasDoUsuario1();
     function exibirEstatisticasDoUsuario1() {
-        let estatisticas1 = {
-            fkUsuario: fkUsuario,
-            fkJogo: fkJogo,
-            idEstatisticas: idEsta
+        let estatisticas = {
+            fkUsuario: sessionStorage.ID_USUARIO,
+            fkJogo: input_jogo_assistencia.value,
+            idEstatisticas: btn_assistencia.value + 2
         };
 
-        sessionStorage.setItem('ESTATISTICAS', JSON.stringify(estatisticas1));
+        sessionStorage.setItem('ESTATISTICAS', JSON.stringify(estatisticas));
 
-        console.log(estatisticas1)
+        console.log(estatisticas)
 
-        obterDadosGrafico1(estatisticas1.fkJogo);
+        obterDadosGrafico1(estatisticas.fkJogo);
 
-        exibirEstatisticas1(estatisticas1);
-
-    }
-
-    function exibirEstatisticas1(idJogoAssistencia) {
-        let estatisticas1 = {
-            fkUsuario: fkUsuario,
-            fkJogo: fkJogo,
-            idEstatisticas: idEsta
-        };
-
-        // Converta o objeto JSON em uma string JSON e armazene na sessionStorage
-        sessionStorage.setItem('ESTATISTICAS', JSON.stringify(estatisticas1));
-        let todosOsGraficos1 = estatisticas1;
-
-        for (i = 0; i < todosOsGraficos1.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos1[i].id != idJogoAssistencia) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos1[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
-
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btn_gols${todosOsGraficos1[i].id}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
-            }
-        }
-
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idJogoAssistencia}`);
-        if (graficoExibir) {
-            graficoExibir.classList.remove("display-none");
-            graficoExibir.classList.add("display-block");
-
-            // alterando estilo do botão
-            let btnExibir = document.getElementById(`btn_gols${idJogoAssistencia}`);
-            if (btnExibir) {
-                btnExibir.classList.remove("btn-white");
-                btnExibir.classList.add("btn-pink");
-            }
-        }
     }
 
     function obterDadosGrafico1(idJogoAssistencia) {
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
 
         fetch(`/entrada/ultimasAssistencia/${idJogoAssistencia}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -353,7 +220,7 @@ function atualizarAssistencia() {
             });
     }
 
-    function plotarGrafico1(resposta, idJogoAssistencia) {
+    function plotarGrafico1(resposta) {
 
         console.log('iniciando plotagem do gráfico...');
 

@@ -6,11 +6,6 @@ function cadastrar(req, res) {
     var sobrenome = req.body.sobrenomeServer;
     var assistencia = req.body.assistenciaServer;
     var fkUsuario = req.body.fkUsuarioServer;
-
-
-
-
-
     // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
@@ -41,7 +36,6 @@ function cadastrar(req, res) {
     }
 }
 
-
 function buscarUltimasMedidasMaestro(req, res) {
 
     const limite_linhas = 7;
@@ -60,9 +54,6 @@ function buscarUltimasMedidasMaestro(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-
-
-
 
 module.exports = {
     buscarUltimasMedidasMaestro,

@@ -46,7 +46,5 @@ function cadastrar(fkUsuario, fkJogo, idEsta, nome, sobrenome, assistencia, gol)
 module.exports = {
     cadastrar,
     buscarUltimasMedidasGol,
-    buscarMedidasEmTempoRealGol,
     buscarUltimasMedidasAssistencia,
-    buscarMedidasEmTempoRealAssistencia
 };

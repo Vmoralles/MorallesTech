@@ -18,8 +18,6 @@ function gols() {
                 sobrenomeServer: sobrenome,
                 golServer: gol,
                 fkUsuarioServer: fkUsuario,
-
-
             }),
         })
             .then(function (resposta) {
@@ -35,13 +33,9 @@ function gols() {
                 console.log(`#ERRO: ${resposta}`);
 
             });
-
         return false;
     }
 }
-
-
-
 
 
 function assistencias() {
@@ -64,8 +58,6 @@ function assistencias() {
                 sobrenomeServer: sobrenome,
                 assistenciaServer: assistencia,
                 fkUsuarioServer: fkUsuario,
-
-
             }),
         })
             .then(function (resposta) {
@@ -79,56 +71,11 @@ function assistencias() {
             })
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
-
             });
         return false;
     }
 }
 function atualizarGol() {
-
-    const fkUsuario = sessionStorage.ID_USUARIO
-    const idArtilheiros = +1
-    window.onload = exibirEstatisticasDoUsuario();
-    function exibirEstatisticasDoUsuario() {
-        let artilheiros = {
-            fkUsuario: fkUsuario,
-            idArtilheiro: idArtilheiros
-        };
-
-        sessionStorage.setItem('Artilheiro', JSON.stringify(artilheiros));
-
-        console.log(artilheiros)
-
-        obterDadosGrafico(artilheiros);
-
-        exibirEstatisticas(artilheiros);
-
-    }
-
-    function exibirEstatisticas() {
-        let artilheiros = {
-            fkUsuario: fkUsuario,
-            idArtilheiro: idArtilheiros
-        };
-
-        // Converta o objeto JSON em uma string JSON e armazene na sessionStorage
-        sessionStorage.setItem('ESTATISTICAS', JSON.stringify(artilheiros));
-        let todosOsGraficos = artilheiros;
-
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != artilheiros) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
-            }
-        }
-    }
-}
-
-function obterDadosGrafico() {
 
     fetch(`/artilheiro/ultimas`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
@@ -144,115 +91,72 @@ function obterDadosGrafico() {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
-}
 
-function plotarGrafico(resposta) {
 
-    console.log('iniciando plotagem do gráfico...');
+    function plotarGrafico(resposta) {
 
-    // Criando estrutura para plotar gráfico - labels
-    // Criando estrutura para plotar gráfico - dados
-    let dados = {
-        labels: [],
-        datasets: [{
-            label: 'Gols',
-            data: [],
-            borderWidth: 1
-        }]
-    };
+        console.log('iniciando plotagem do gráfico...');
 
-    console.log('----------------------------------------------')
-    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-    console.log(resposta)
+        // Criando estrutura para plotar gráfico - labels
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: [],
+            datasets: [{
+                label: 'Gols',
+                data: [],
+                borderWidth: 1
+            }]
+        };
 
-    // Inserindo valores recebidos em estrutura para plotar o gráfico
-    for (i = 0; i < resposta.length; i++) {
-        var registro = resposta[i];
-        dados.labels.push(registro.nome + " " + registro.sobrenome);
-        dados.datasets[0].data.push(registro.gol);
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            dados.labels.push(registro.nome + " " + registro.sobrenome);
+            dados.datasets[0].data.push(registro.gol);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+        const ctx = document.getElementById('myChart');
+        // Adicionando gráfico criado em div na tela
+        if (Chart.getChart(ctx)) {
+            // Destruir o gráfico existente antes de criar um novo
+            Chart.getChart(ctx).destroy();
+        }
+        myChart = new Chart(ctx, config)
     }
-
-    console.log('----------------------------------------------')
-    console.log('O gráfico será plotado com os respectivos valores:')
-    console.log('Labels:')
-    console.log('Dados:')
-    console.log(dados.datasets)
-    console.log('----------------------------------------------')
-
-    // Criando estrutura para plotar gráfico - config
-    const config = {
-        type: 'bar',
-        data: dados,
-    };
-    const ctx = document.getElementById('myChart');
-    // Adicionando gráfico criado em div na tela
-    if (Chart.getChart(ctx)) {
-        // Destruir o gráfico existente antes de criar um novo
-        Chart.getChart(ctx).destroy();
-    }
-    myChart = new Chart(ctx, config)
 }
-
 
 function atualizarAssistencia() {
-    const fkUsuario = sessionStorage.ID_USUARIO
-    const idMaestros = +1
-    window.onload = exibirEstatisticasDoUsuario();
-    function exibirEstatisticasDoUsuario() {
-        let maestros = {
-            fkUsuario: fkUsuario,
-            idMaestro: idMaestros
-        };
 
-        sessionStorage.setItem('Maestros', JSON.stringify(maestros));
-
-        console.log(maestros)
-
-        obterDadosGrafico(maestros);
-
-        exibirEstatisticas(maestros);
-
-    }
-
-    function exibirEstatisticas() {
-        let maestros = {
-            fkUsuario: fkUsuario,
-            idMaestro: idMaestros
-        };
-
-        // Converta o objeto JSON em uma string JSON e armazene na sessionStorage
-        sessionStorage.setItem('ESTATISTICAS', JSON.stringify(maestros));
-        let todosOsGraficos = maestros;
-
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != maestros) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
-            }
-        }
-    }
-
-    function obterDadosGrafico() {
-
-        fetch(`/maestro/ultimas`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-                    plotarGrafico(resposta);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    fetch(`/maestro/ultimas`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+                plotarGrafico(resposta);
             });
-    }
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
 
     function plotarGrafico(resposta) {
 

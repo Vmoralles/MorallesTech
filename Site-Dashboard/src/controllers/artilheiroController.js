@@ -6,11 +6,6 @@ function cadastrar(req, res) {
     var sobrenome = req.body.sobrenomeServer;
     var gol = req.body.golServer;
     var fkUsuario = req.body.fkUsuarioServer;
-
-
-
-
-
     // Faça as validações dos valores
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
