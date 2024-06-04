@@ -237,10 +237,32 @@ nav ul li a:hover {
     cursor: pointer;
     height: 5vh;
     width: 10vw;
-    margin-left: 20vh;
+    margin-left: 5vh;
 }
 
 .botao:hover {
+    background-color: #FDCD1C;
+    color: #0057B6;
+}
+
+.botao-atualizar {
+    margin-top: -5vh;
+    background-color: #0057B6;
+    color: #FDCD1C;
+    font-size: 2vh;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1vh;
+    border: none;
+    border-radius: 6vh;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    height: 5vh;
+    width: 10vw;
+    margin-left: 35vh;
+}
+
+.botao-atualizar:hover {
     background-color: #FDCD1C;
     color: #0057B6;
 }
