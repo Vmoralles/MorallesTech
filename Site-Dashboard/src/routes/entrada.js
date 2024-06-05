@@ -11,7 +11,16 @@ router.get("/ultimasAssistencia/:idJogoAssistencia", function (req, res) {
     entradaController.buscarUltimasMedidasAssistencia(req, res);
 });
 
+router.get("/graficoGol", function (req, res) {
+    entradaController.buscarUltimosGols(req, res);
+});
+
+router.get("/graficoAssistencia", function (req, res) {
+    entradaController.buscarUltimasAssistencias(req, res);
+});
+
 router.post("/cadastrar", function (req, res) {
     entradaController.cadastrar(req, res);
 })
+
 module.exports = router;

@@ -87,8 +87,48 @@ function buscarUltimasMedidasAssistencia(req, res) {
     });
 }
 
+function buscarUltimosGols(req, res) {
+
+    const limite_linhasAssistencia = 7;
+
+    console.log(`Recuperando as ultimas ${limite_linhasAssistencia} medidas`);
+
+    entradaModel.buscarUltimasGols(limite_linhasAssistencia).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarUltimasAssistencias(req, res) {
+
+    const limite_linhasAssistencia = 7;
+
+    console.log(`Recuperando as ultimas ${limite_linhasAssistencia} medidas`);
+
+    entradaModel.buscarUltimasAssistencias(limite_linhasAssistencia).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     buscarUltimasMedidasGol,
     buscarUltimasMedidasAssistencia,
+    buscarUltimosGols,
+    buscarUltimasAssistencias,
     cadastrar
 }

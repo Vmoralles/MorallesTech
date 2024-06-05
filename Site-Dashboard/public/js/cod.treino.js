@@ -1,11 +1,31 @@
+const dadosUsuario = {
+    nomeGol: "",
+    sobrenomeGol: "",
+    nomeAssistencia: "",
+    sobrenomeAssitencia: "",
+    fkUsuario: sessionStorage.ID_USUARIO,
+}
+
+function atualizarDadosUsuario() {
+    dadosUsuario.nomeGol = input_nome_gol.value.trim().toLowerCase();
+    dadosUsuario.sobrenomeGol = input_sobrenome_gol.value.trim().toLowerCase();
+    dadosUsuario.nomeAssistencia = input_nome_assistencia.value.trim().toLowerCase();
+    dadosUsuario.sobrenomeAssitencia = input_sobrenome_assistencia.value.trim().toLowerCase();
+}
+
+function atualizarGraficos() {
+    window.location = "../dashboard/site.treino.html"
+}
+
+// Definindo o intervalo de atualização 
+setInterval(atualizarDadosUsuario, 1000);
+
 function gols() {
-    const nome = document.getElementById('input_nome_gol').value.trim();
-    const sobrenome = document.getElementById('input_sobrenome_gol').value.trim();
     const gol = parseInt(document.getElementById('input_gols').value);
-    const fkUsuario = sessionStorage.ID_USUARIO
-    if (nome == "" || sobrenome == "" || isNaN(gol)) {
+    if (dadosUsuario.nomeGol == "" || dadosUsuario.sobrenomeGol == "" || isNaN(gol)) {
         div_resultado.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de gols.`;
     } else {
+        atualizarGraficos()
         fetch("/artilheiro/cadastrar", {
             method: "POST",
             headers: {
@@ -14,10 +34,10 @@ function gols() {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nome,
-                sobrenomeServer: sobrenome,
+                nomeServer: dadosUsuario.nomeGol,
+                sobrenomeServer: dadosUsuario.sobrenomeGol,
                 golServer: gol,
-                fkUsuarioServer: fkUsuario,
+                fkUsuarioServer: dadosUsuario.fkUsuario,
             }),
         })
             .then(function (resposta) {
@@ -39,13 +59,11 @@ function gols() {
 
 
 function assistencias() {
-    const nome = document.getElementById('input_nome_assistencia').value.trim();
-    const sobrenome = document.getElementById('input_sobrenome_assistencia').value.trim();
     const assistencia = parseInt(document.getElementById('input_assistencia').value);
-    const fkUsuario = sessionStorage.ID_USUARIO
-    if (nome === "" || sobrenome === "" || isNaN(assistencia)) {
+    if (dadosUsuario.nomeAssistencia === "" || dadosUsuario.sobrenomeAssitencia === "" || isNaN(assistencia)) {
         div_treino.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de assistência.`;
     } else {
+        atualizarGraficos()
         fetch("/maestro/cadastrar", {
             method: "POST",
             headers: {
@@ -54,10 +72,10 @@ function assistencias() {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nome,
-                sobrenomeServer: sobrenome,
+                nomeServer: dadosUsuario.nomeAssistencia,
+                sobrenomeServer: dadosUsuario.sobrenomeAssitencia,
                 assistenciaServer: assistencia,
-                fkUsuarioServer: fkUsuario,
+                fkUsuarioServer: dadosUsuario.fkUsuario,
             }),
         })
             .then(function (resposta) {
@@ -77,11 +95,15 @@ function assistencias() {
 }
 
 // window.onload = atualizarGraficoGol();
+let proximaAtualizacao;
 window.onload = obterGraficos();
-window.onload = plotarGrafico();
-
+window.onload = atualizarGraficoGol();
 
 function obterGraficos() {
+
+    if (proximaAtualizacao != undefined) {
+        clearTimeout(proximaAtualizacao);
+    }
 
     fetch(`/artilheiro/ultimasGol`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
@@ -206,5 +228,5 @@ function plotarGraficoAssistencia(resposta) {
         Chart.getChart(ctx).destroy();
     }
     myChart1 = new Chart(ctx, config)
+    console.log(dados.labels)
 }
-

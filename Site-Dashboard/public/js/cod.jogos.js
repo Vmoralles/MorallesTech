@@ -1,19 +1,44 @@
+const dadosUsuario = {
+    nomeGol: "",
+    sobrenomeGol: "",
+    fkJogoGol: "",
+    nomeAssistencia: "",
+    sobrenomeAssistencia: "",
+    fkJogoAssistencia: "",
+    fkUsuario: sessionStorage.ID_USUARIO,
+    nomeSession: sessionStorage.NOME_USUARIO.toLowerCase(),
+    sobrenomeSession: sessionStorage.SOBRENOME_USUARIO.toLowerCase()
+}
+
+function atualizarDadosUsuario() {
+    dadosUsuario.nomeGol = input_nome_gol.value.trim().toLowerCase();
+    dadosUsuario.sobrenomeGol = input_sobrenome_gol.value.trim().toLowerCase();
+    dadosUsuario.fkJogoGol = input_jogo.value;
+    dadosUsuario.nomeAssistencia = input_nome_assistencia.value.trim().toLowerCase();
+    dadosUsuario.sobrenomeAssistencia = input_sobrenome_assistencia.value.trim().toLowerCase();
+    dadosUsuario.fkJogoAssistencia = input_jogo_assistencia.value;
+}
+
+// Definindo o intervalo de atualização 
+setInterval(atualizarDadosUsuario, 1000);
+
+function atualizarGraficos() {
+    window.location = "../dashboard/site.jogos.html"
+}
+
+
 function gols() {
-    const nome = input_nome_gol.value.trim().toLowerCase();
-    const sobrenome = input_sobrenome_gol.value.trim().toLowerCase();
     const gol = input_gols.value;
-    const fkJogo = input_jogo.value;
     const assistencia = 0
-    const fkUsuario = sessionStorage.ID_USUARIO
-    let idEsta = btn_gols.value = 1
-    const nomeSession = sessionStorage.NOME_USUARIO.toLowerCase()
-    const sobrenomeSession = sessionStorage.SOBRENOME_USUARIO.toLowerCase()
+    const idEsta = btn_gols.value = 1
+    console.log(dadosUsuario)
     limparDiv()
-    if (nome == "" || sobrenome == "" || isNaN(gol) || isNaN(fkJogo)) {
+    if (dadosUsuario.nomeGol == "" || dadosUsuario.sobrenomeGol == "" || isNaN(gol) || isNaN(dadosUsuario.fkJogoGol)) {
         div_jogo.innerHTML = `Por favor, preencha o nome completo do jogador, o jogo e a quantidade de gols.`;
-    } else if (sobrenome != sobrenomeSession || nome != nomeSession) {
-        div_jogo.innerHTML = ` Você não é o ${nomeSession} ${sobrenomeSession}`
+    } else if (dadosUsuario.sobrenomeGol != dadosUsuario.sobrenomeSession || dadosUsuario.nomeGol != dadosUsuario.nomeSession) {
+        div_jogo.innerHTML = ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
     } else {
+        atualizarGraficos()
         fetch("/entrada/cadastrar", {
             method: "POST",
             headers: {
@@ -22,11 +47,11 @@ function gols() {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                fkUsuarioServer: fkUsuario,
-                fkJogoServer: fkJogo,
+                fkUsuarioServer: dadosUsuario.fkUsuario,
+                fkJogoServer: dadosUsuario.fkJogoGol,
                 idEstaServer: idEsta,
-                nomeServer: nome,
-                sobrenomeServer: sobrenome,
+                nomeServer: dadosUsuario.nomeGol,
+                sobrenomeServer: dadosUsuario.sobrenomeGol,
                 golServer: gol,
                 assistenciaServer: assistencia
             }),
@@ -49,21 +74,17 @@ function gols() {
 }
 
 function assistencias() {
-    const nome = document.getElementById('input_nome_assistencia').value.trim();
-    const sobrenome = document.getElementById('input_sobrenome_assistencia').value.trim();
-    const assistencia = parseInt(document.getElementById('input_assistencia').value);
-    const fkJogo = parseInt(document.getElementById('input_jogo_assistencia').value);
+    const assistencia = input_assistencia.value;
     const gol = 0
-    const fkUsuario = sessionStorage.ID_USUARIO
-    let idEsta = btn_assistencia.value + 2
-    const nomeSession = sessionStorage.NOME_USUARIO.toLowerCase()
-    const sobrenomeSession = sessionStorage.SOBRENOME_USUARIO.toLowerCase()
+    const idEsta = btn_assistencia.value + 2
+
     limparDiv()
-    if (nome == "" || sobrenome == "" || isNaN(assistencia) || isNaN(fkJogo)) {
+    if (dadosUsuario.nomeAssistencia == "" || dadosUsuario.sobrenomeAssistencia == "" || isNaN(assistencia) || isNaN(dadosUsuario.fkJogoAssistencia)) {
         div_jogo.innerHTML += `Por favor, preencha o nome completo do jogador, o jogo e a quantidade de assistência.`;
-    } else if (sobrenome != sobrenomeSession || nome != nomeSession) {
-        div_jogo.innerHTML += ` Você não é o ${nomeSession} ${sobrenomeSession}`
+    } else if (dadosUsuario.sobrenomeAssistencia != dadosUsuario.sobrenomeSession || dadosUsuario.nomeAssistencia != dadosUsuario.nomeSession) {
+        div_jogo.innerHTML += ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
     } else {
+        atualizarGraficos()
         fetch("/entrada/cadastrar", {
             method: "POST",
             headers: {
@@ -72,11 +93,11 @@ function assistencias() {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                fkUsuarioServer: fkUsuario,
-                fkJogoServer: fkJogo,
+                fkUsuarioServer: dadosUsuario.fkUsuario,
+                fkJogoServer: dadosUsuario.fkJogoAssistencia,
                 idEstaServer: idEsta,
-                nomeServer: nome,
-                sobrenomeServer: sobrenome,
+                nomeServer: dadosUsuario.nomeAssistencia,
+                sobrenomeServer: dadosUsuario.sobrenomeAssistencia,
                 golServer: gol,
                 assistenciaServer: assistencia
             }),
@@ -95,6 +116,7 @@ function assistencias() {
 
             });
         return false;
+
     }
 }
 
@@ -190,7 +212,7 @@ function atualizarAssistencia() {
         let estatisticas = {
             fkUsuario: sessionStorage.ID_USUARIO,
             fkJogo: input_jogo_assistencia.value,
-            idEstatisticas: btn_assistencia.value + 2
+            idEstatisticas: btn_assistencia.value = 2
         };
 
         sessionStorage.setItem('ESTATISTICAS', JSON.stringify(estatisticas));
@@ -243,7 +265,7 @@ function atualizarAssistencia() {
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             dados.labels.push(registro.nome + " " + registro.sobrenome);
-            dados.datasets[0].data.push(registro.assistencia);
+            dados.datasets[0].data.push(registro.Assistencia);
         }
 
         console.log('----------------------------------------------')
@@ -268,6 +290,138 @@ function atualizarAssistencia() {
     }
 }
 
+window.onload = obterGrafico();
+window.onload = atualizarGrafico();
+
+
+function obterGrafico() {
+
+    fetch(`/entrada/graficoAssistencia`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+                plotarGraficoAssistencia(resposta);
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+
+    fetch(`/entrada/graficoGol`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+                plotarGraficoGol(resposta);
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+function plotarGraficoGol(resposta) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    // Criando estrutura para plotar gráfico - labels
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+        labels: [],
+        datasets: [{
+            label: 'Gols',
+            data: [],
+            borderWidth: 1
+        }]
+    };
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.labels.push(registro.nome + " " + registro.sobrenome);
+        dados.datasets[0].data.push(registro.Gol);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+        type: 'bar',
+        data: dados,
+    };
+    const ctx = document.getElementById('myChart');
+    // Adicionando gráfico criado em div na tela
+    if (Chart.getChart(ctx)) {
+        // Destruir o gráfico existente antes de criar um novo
+        Chart.getChart(ctx).destroy();
+    }
+    myChart = new Chart(ctx, config)
+}
+
+function plotarGraficoAssistencia(resposta) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    // Criando estrutura para plotar gráfico - labels
+    // Criando estrutura para plotar gráfico - dados
+    let dados = {
+        labels: [],
+        datasets: [{
+            label: 'Assistencia',
+            data: [],
+            borderWidth: 1
+        }]
+    };
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.labels.push(registro.nome + " " + registro.sobrenome);
+        dados.datasets[0].data.push(registro.Assistencia);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    // Criando estrutura para plotar gráfico - config
+    const config = {
+        type: 'bar',
+        data: dados,
+    };
+    const ctx = document.getElementById('myChart1');
+    // Adicionando gráfico criado em div na tela
+    if (Chart.getChart(ctx)) {
+        // Destruir o gráfico existente antes de criar um novo
+        Chart.getChart(ctx).destroy();
+    }
+    myChart = new Chart(ctx, config)
+}
 function sumirMensagem() {
     div_alert.style.display = "none";
 }

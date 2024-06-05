@@ -13,7 +13,7 @@ function buscarUltimasMedidasMaestro(limite_linhas) {
         from treinoMaestro
         GROUP BY nome, sobrenome
     )
-    ORDER BY assistencia LIMIT ${limite_linhas}`;
+    ORDER BY assistencia DESC LIMIT ${limite_linhas}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

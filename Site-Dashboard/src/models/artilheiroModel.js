@@ -11,21 +11,12 @@ function buscarUltimasMedidasArtilheiro(limite_linhas) {
         FROM treinoArtilheiro
         GROUP BY nome, sobrenome
     )
-    ORDER BY gol LIMIT ${limite_linhas}`;
+    ORDER BY gol DESC LIMIT ${limite_linhas}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function buscarMedidasEmTempoRealArtilheiro() {
 
-    var instrucaoSql = `SELECT max(gol)
-    FROM treinoArtilheiro
-    GROUP BY nome, sobrenome
-    ORDER BY max(gol) DESC LIMIT 1`;
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucaoSql
 function cadastrar(nome, sobrenome, gol, fkUsuario) {
@@ -44,5 +35,4 @@ function cadastrar(nome, sobrenome, gol, fkUsuario) {
 module.exports = {
     cadastrar,
     buscarUltimasMedidasArtilheiro,
-    buscarMedidasEmTempoRealArtilheiro
 };
