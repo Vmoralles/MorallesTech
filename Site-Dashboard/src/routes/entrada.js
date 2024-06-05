@@ -10,6 +10,7 @@ router.get("/ultimasGol/:idJogoGol", function (req, res) {
 router.get("/ultimasAssistencia/:idJogoAssistencia", function (req, res) {
     entradaController.buscarUltimasMedidasAssistencia(req, res);
 });
+
 router.post("/cadastrar", function (req, res) {
     entradaController.cadastrar(req, res);
 })

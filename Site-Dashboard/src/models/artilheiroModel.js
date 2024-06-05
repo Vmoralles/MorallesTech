@@ -2,12 +2,26 @@ var database = require("../database/config")
 
 function buscarUltimasMedidasArtilheiro(limite_linhas) {
 
-    var instrucaoSql = `SELECT 
-    gol,
-    nome,
+    var instrucaoSql = `SELECT gol,
+    nome, 
     sobrenome
     FROM treinoArtilheiro
-    ORDER BY idArtilheiro DESC LIMIT ${limite_linhas}`;
+    WHERE (nome, sobrenome, gol) IN (
+        SELECT nome, sobrenome, MAX(gol) AS MaiorGol
+        FROM treinoArtilheiro
+        GROUP BY nome, sobrenome
+    )
+    ORDER BY gol LIMIT ${limite_linhas}`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function buscarMedidasEmTempoRealArtilheiro() {
+
+    var instrucaoSql = `SELECT max(gol)
+    FROM treinoArtilheiro
+    GROUP BY nome, sobrenome
+    ORDER BY max(gol) DESC LIMIT 1`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -30,4 +44,5 @@ function cadastrar(nome, sobrenome, gol, fkUsuario) {
 module.exports = {
     cadastrar,
     buscarUltimasMedidasArtilheiro,
+    buscarMedidasEmTempoRealArtilheiro
 };

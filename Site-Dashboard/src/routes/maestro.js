@@ -3,7 +3,7 @@ var router = express.Router();
 
 var maestroController = require("../controllers/maestroController");
 
-router.get("/ultimas", function (req, res) {
+router.get("/ultimasAssistencia", function (req, res) {
     maestroController.buscarUltimasMedidasMaestro(req, res);
 });
 

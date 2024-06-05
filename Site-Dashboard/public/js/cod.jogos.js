@@ -1,8 +1,8 @@
 function gols() {
-    const nome = document.getElementById('input_nome_gol').value.trim().toLowerCase();
-    const sobrenome = document.getElementById('input_sobrenome_gol').value.trim().toLowerCase();
-    const gol = parseInt(document.getElementById('input_gols').value);
-    const fkJogo = parseInt(document.getElementById('input_jogo').value);
+    const nome = input_nome_gol.value.trim().toLowerCase();
+    const sobrenome = input_sobrenome_gol.value.trim().toLowerCase();
+    const gol = input_gols.value;
+    const fkJogo = input_jogo.value;
     const assistencia = 0
     const fkUsuario = sessionStorage.ID_USUARIO
     let idEsta = btn_gols.value = 1
