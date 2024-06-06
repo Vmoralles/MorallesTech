@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body onload="validarSessao()">
 
     <header>
         <div id="logo-Ministerio">
@@ -45,7 +45,10 @@
             </div>
             <div>
                 <div class="barra"></div>
-                <div id="div_ola">
+                <div class="textoCentral">
+                    <b style="color: black">OLÁ</b>
+                    <span id="nome_usuario"></span>
+                    <span id="sobrenome_usuario"></span>
                 </div>
                 <div class="barra"></div>
                 <span class="texto">Bem-vindo ao seu portal do Ministério do Esporte. Este é o lugar onde você pode
@@ -64,7 +67,7 @@
             <div class="barra"></div>
         </div>
     </div>
-    
+
 </body>
 
 </html>
@@ -77,7 +80,6 @@
     function jogar() {
         window.location = "../dashboard/site.cruzadinha.html";
     }
-    const nome = sessionStorage.NOME_USUARIO.toUpperCase()
-    const sobrenome = sessionStorage.SOBRENOME_USUARIO.toUpperCase()
-    div_ola.innerHTML = ` <div class="textoCentral"><b style="color: black">OLÁ</b> ${nome} ${sobrenome} </div>`
+
 </script>
+<script src="js/cod.sessao.js"></script>

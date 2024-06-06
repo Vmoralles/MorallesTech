@@ -291,7 +291,6 @@ function atualizarAssistencia() {
 }
 
 window.onload = obterGrafico();
-window.onload = atualizarGrafico();
 
 
 function obterGrafico() {

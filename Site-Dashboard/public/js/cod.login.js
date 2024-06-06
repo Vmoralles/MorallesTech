@@ -1,5 +1,6 @@
-function entrar() {
 
+function entrar() {
+    aguardar();
 
     var emailVar = input_email.value;
     var senhaVar = input_senha.value;
@@ -7,6 +8,10 @@ function entrar() {
     if (senhaVar == "" || senhaVar == "") {
         div_alert.style.display = 'block';
         div_alert.innerHTML = "PREENCHA TODOS <br> OS CAMPOS!"
+        finalizarAguardar();
+        return false;
+    } else {
+        div_alert.style.display = 'none';
     }
 
 
@@ -35,7 +40,6 @@ function entrar() {
                 sessionStorage.NOME_USUARIO = json.nome;
                 sessionStorage.SOBRENOME_USUARIO = json.sobrenome;
                 sessionStorage.ID_USUARIO = json.idUsuario;
-                sessionStorage.ARTILHEIRO = JSON.stringify(json.artilheiro)
 
                 setTimeout(function () {
                     window.location = "site_index.html";

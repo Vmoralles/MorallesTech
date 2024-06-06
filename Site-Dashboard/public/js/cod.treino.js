@@ -97,7 +97,6 @@ function assistencias() {
 // window.onload = atualizarGraficoGol();
 let proximaAtualizacao;
 window.onload = obterGraficos();
-window.onload = atualizarGraficoGol();
 
 function obterGraficos() {
 

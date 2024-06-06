@@ -236,3 +236,18 @@ footer {
     height: 2.5vh;
     font-size: 2vh;
 }
+.loading {
+    color: #FDCD1C;
+    text-align: center;
+    margin: 2vh auto;
+    width: 15vw;
+    border-radius: 1vh;
+    margin-left: 45vw;
+    display: flex;
+    justify-content: center;
+}
+
+#loading-gif{
+    display:none;
+   height: 8vh;
+}
