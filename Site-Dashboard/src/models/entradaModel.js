@@ -3,13 +3,16 @@ var database = require("../database/config")
 
 function buscarUltimasMedidasAssistencia(idJogoAssistencia, limite_linhasAssistencia) {
 
-    var instrucaoSql = `SELECT 
-    qtdAssistencia as Assistencia, 
-    nome,
-    sobrenome
+    var instrucaoSql = `SELECT nome, sobrenome,MAX(soma_Assistencia) AS maximo_Assistencia
+    FROM (
+    SELECT nome, sobrenome, SUM(qtdAssistencia) AS soma_Assistencia
     FROM estatisticas
-    WHERE fkJogo = ${idJogoAssistencia}
-    ORDER BY idEsta DESC LIMIT ${limite_linhasAssistencia}`;
+    where fkJogo = ${idJogoAssistencia}
+    GROUP BY nome, sobrenome
+    ) AS total_Gols
+    GROUP BY nome, sobrenome
+    ORDER BY maximo_Assistencia DESC 
+    LIMIT ${limite_linhasAssistencia}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -17,31 +20,32 @@ function buscarUltimasMedidasAssistencia(idJogoAssistencia, limite_linhasAssiste
 
 function buscarUltimasMedidasGol(idJogoGol, limite_linhasGol) {
 
-    var instrucaoSql = `SELECT 
-    qtdGol as Gol,
-    nome,
-    sobrenome
+    var instrucaoSql = `SELECT nome, sobrenome,MAX(soma_gols) AS maximo_gols
+    FROM (
+    SELECT nome, sobrenome, SUM(qtdGol) AS soma_gols
     FROM estatisticas
-    WHERE fkJogo = ${idJogoGol}
-    ORDER BY idEsta DESC LIMIT ${limite_linhasGol}`;
+    where fkJogo = ${idJogoGol}
+    GROUP BY nome, sobrenome
+    ) AS total_Gols 
+    GROUP BY nome, sobrenome
+    ORDER BY maximo_gols DESC
+    LIMIT ${limite_linhasGol}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarUltimasAssistencias(limite_linhasGol) {
+function buscarUltimasAssistencias(limite_linhasAssistencia) {
 
-    var instrucaoSql = `SELECT 
-    nome,
-    sobrenome,
-    qtdAssistencia AS Assistencia
+    var instrucaoSql = `SELECT nome, sobrenome,MAX(soma_Assistencia) AS maximo_Assistencia
+    FROM (
+    SELECT nome, sobrenome, SUM(qtdAssistencia) AS soma_Assistencia
     FROM estatisticas
-    WHERE (nome, sobrenome, qtdAssistencia) IN (
-        SELECT nome, sobrenome, MAX(qtdAssistencia)
-        FROM estatisticas
-        GROUP BY nome, sobrenome
-    )
-    ORDER BY qtdAssistencia DESC LIMIT ${limite_linhasGol}`;
+    GROUP BY nome, sobrenome
+    ) AS total_Assistencias
+    GROUP BY nome, sobrenome
+    ORDER BY maximo_Assistencia DESC 
+    LIMIT  ${limite_linhasAssistencia}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -49,17 +53,15 @@ function buscarUltimasAssistencias(limite_linhasGol) {
 
 function buscarUltimasGols(limite_linhasGol) {
 
-    var instrucaoSql = `SELECT 
-    nome,
-    sobrenome,
-    qtdGol AS Gol
+    var instrucaoSql = `SELECT nome, sobrenome,MAX(soma_gols) AS maximo_gols
+    FROM (
+    SELECT nome, sobrenome, SUM(qtdGol) AS soma_gols
     FROM estatisticas
-     WHERE (nome, sobrenome, qtdGol) IN (
-        SELECT nome, sobrenome, MAX(qtdGol)
-        FROM estatisticas
-        GROUP BY nome, sobrenome
-    )
-    ORDER BY qtdGol DESC LIMIT ${limite_linhasGol}`;
+    GROUP BY nome, sobrenome
+    ) AS total_Gols 
+    GROUP BY nome, sobrenome
+    ORDER BY maximo_gols DESC 
+    LIMIT ${limite_linhasGol}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

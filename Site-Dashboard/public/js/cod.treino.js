@@ -23,7 +23,9 @@ setInterval(atualizarDadosUsuario, 1000);
 function gols() {
     const gol = parseInt(document.getElementById('input_gols').value);
     if (dadosUsuario.nomeGol == "" || dadosUsuario.sobrenomeGol == "" || isNaN(gol)) {
-        div_resultado.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de gols.`;
+        div_treino.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de gols.`;
+    } else if (dadosUsuario.sobrenomeAssistencia != dadosUsuario.sobrenomeSession || dadosUsuario.nomeAssistencia != dadosUsuario.nomeSession) {
+        div_treino.innerHTML += ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
     } else {
         atualizarGraficos()
         fetch("/artilheiro/cadastrar", {
@@ -62,6 +64,8 @@ function assistencias() {
     const assistencia = parseInt(document.getElementById('input_assistencia').value);
     if (dadosUsuario.nomeAssistencia === "" || dadosUsuario.sobrenomeAssitencia === "" || isNaN(assistencia)) {
         div_treino.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de assistência.`;
+    } else if (dadosUsuario.sobrenomeAssistencia != dadosUsuario.sobrenomeSession || dadosUsuario.nomeAssistencia != dadosUsuario.nomeSession) {
+        div_treino.innerHTML += ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
     } else {
         atualizarGraficos()
         fetch("/maestro/cadastrar", {
@@ -158,7 +162,7 @@ function plotarGrafico(resposta) {
     for (i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
         dados.labels.push(registro.nome + " " + registro.sobrenome);
-        dados.datasets[0].data.push(registro.gol);
+        dados.datasets[0].data.push(registro.maximo_gols);
     }
 
     console.log('----------------------------------------------')
@@ -205,7 +209,7 @@ function plotarGraficoAssistencia(resposta) {
     for (i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
         dados.labels.push(registro.nome + " " + registro.sobrenome);
-        dados.datasets[0].data.push(registro.assistencia);
+        dados.datasets[0].data.push(registro.maximo_Assistencia);
     }
 
     console.log('----------------------------------------------')

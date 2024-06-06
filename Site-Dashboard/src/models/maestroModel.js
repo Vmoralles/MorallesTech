@@ -3,17 +3,15 @@ var database = require("../database/config")
 
 function buscarUltimasMedidasMaestro(limite_linhas) {
 
-    var instrucaoSql = `SELECT 
-    assistencia,
-    nome,
-    sobrenome
+    var instrucaoSql = `SELECT nome, sobrenome,MAX(soma_Assistencia) AS maximo_Assistencia
+    FROM (
+    SELECT nome, sobrenome, SUM(assistencia) AS soma_Assistencia
     FROM treinoMaestro
-    where (nome, sobrenome, assistencia) IN (
-        select nome, sobrenome, MAX(assistencia) AS MaiorAssistencia
-        from treinoMaestro
-        GROUP BY nome, sobrenome
-    )
-    ORDER BY assistencia DESC LIMIT ${limite_linhas}`;
+    GROUP BY nome, sobrenome
+    ) AS total_Assistencia
+    GROUP BY nome, sobrenome
+    ORDER BY maximo_Assistencia DESC 
+    LIMIT  ${limite_linhas}`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

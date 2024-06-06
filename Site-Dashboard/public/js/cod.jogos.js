@@ -28,6 +28,7 @@ function atualizarGraficos() {
 
 
 function gols() {
+    console.log(dadosUsuario)
     const gol = input_gols.value;
     const assistencia = 0
     const idEsta = btn_gols.value = 1
@@ -35,7 +36,7 @@ function gols() {
     limparDiv()
     if (dadosUsuario.nomeGol == "" || dadosUsuario.sobrenomeGol == "" || isNaN(gol) || isNaN(dadosUsuario.fkJogoGol)) {
         div_jogo.innerHTML = `Por favor, preencha o nome completo do jogador, o jogo e a quantidade de gols.`;
-    } else if (dadosUsuario.sobrenomeGol != dadosUsuario.sobrenomeSession || dadosUsuario.nomeGol != dadosUsuario.nomeSession) {
+    } else if (dadosUsuario.sobrenomeSession != dadosUsuario.sobrenomeGol || dadosUsuario.nomeSession != dadosUsuario.nomeGol) {
         div_jogo.innerHTML = ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
     } else {
         atualizarGraficos()
@@ -180,7 +181,7 @@ function atualizarGol() {
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             dados.labels.push(registro.nome + " " + registro.sobrenome);
-            dados.datasets[0].data.push(registro.Gol);
+            dados.datasets[0].data.push(registro.maximo_gols);
         }
 
         console.log('----------------------------------------------')
@@ -265,7 +266,7 @@ function atualizarAssistencia() {
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             dados.labels.push(registro.nome + " " + registro.sobrenome);
-            dados.datasets[0].data.push(registro.Assistencia);
+            dados.datasets[0].data.push(registro.maximo_Assistencia);
         }
 
         console.log('----------------------------------------------')
@@ -351,7 +352,7 @@ function plotarGraficoGol(resposta) {
     for (i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
         dados.labels.push(registro.nome + " " + registro.sobrenome);
-        dados.datasets[0].data.push(registro.Gol);
+        dados.datasets[0].data.push(registro.maximo_gols);
     }
 
     console.log('----------------------------------------------')
@@ -398,7 +399,7 @@ function plotarGraficoAssistencia(resposta) {
     for (i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
         dados.labels.push(registro.nome + " " + registro.sobrenome);
-        dados.datasets[0].data.push(registro.Assistencia);
+        dados.datasets[0].data.push(registro.maximo_Assistencia);
     }
 
     console.log('----------------------------------------------')

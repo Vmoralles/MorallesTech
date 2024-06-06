@@ -2,16 +2,15 @@ var database = require("../database/config")
 
 function buscarUltimasMedidasArtilheiro(limite_linhas) {
 
-    var instrucaoSql = `SELECT gol,
-    nome, 
-    sobrenome
+    var instrucaoSql = `SELECT nome, sobrenome,MAX(soma_gols) AS maximo_gols
+    FROM (
+    SELECT nome, sobrenome, SUM(gol) AS soma_gols
     FROM treinoArtilheiro
-    WHERE (nome, sobrenome, gol) IN (
-        SELECT nome, sobrenome, MAX(gol) AS MaiorGol
-        FROM treinoArtilheiro
-        GROUP BY nome, sobrenome
-    )
-    ORDER BY gol DESC LIMIT ${limite_linhas}`;
+    GROUP BY nome, sobrenome
+    ) AS total_Gols 
+    GROUP BY nome, sobrenome
+    ORDER BY maximo_gols DESC 
+    LIMIT ${limite_linhas} `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
