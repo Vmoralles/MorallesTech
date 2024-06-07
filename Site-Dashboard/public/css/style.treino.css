@@ -102,7 +102,8 @@ nav ul li a:hover {
     height: auto;
     border: solid 2px #0057B6;
 }
-.direita {   
+
+.direita {
     display: flex;
     flex-direction: column;
     width: 33.3%;
@@ -111,8 +112,9 @@ nav ul li a:hover {
     border: solid 2px #0057B6;
 
 }
+
 #escudo img {
-    
+
     width: 25vw;
     height: 13vh;
     margin-left: 7vw;
@@ -125,6 +127,7 @@ nav ul li a:hover {
     margin-right: 2vw;
     margin-top: 2vh;
 }
+
 #escudo-baixo img {
     width: 25vw;
     height: 13vh;
@@ -244,15 +247,23 @@ nav ul li a:hover {
     background-color: #FDCD1C;
     color: #0057B6;
 }
-.titulo{
+
+.titulo {
     margin-bottom: -3vh;
     text-align: center;
     font-size: 2.5vh;
     color: black;
 }
 
-#div_treino{
-    color: white;;
+#div_treino {
+    color: white;
     text-align: center;
-    background-color: red;
+    border-radius: 1vh;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 1);
+    background-color: #0057B6;
+    height: 3vh;
+    margin-top: 3vh;
+    z-index: 999;
+    position: absolute;
+    margin-right: 65vw;
 }

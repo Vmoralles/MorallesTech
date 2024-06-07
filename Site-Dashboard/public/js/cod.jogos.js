@@ -1,9 +1,5 @@
 const dadosUsuario = {
-    nomeGol: "",
-    sobrenomeGol: "",
     fkJogoGol: "",
-    nomeAssistencia: "",
-    sobrenomeAssistencia: "",
     fkJogoAssistencia: "",
     fkUsuario: sessionStorage.ID_USUARIO,
     nomeSession: sessionStorage.NOME_USUARIO.toLowerCase(),
@@ -11,11 +7,7 @@ const dadosUsuario = {
 }
 
 function atualizarDadosUsuario() {
-    dadosUsuario.nomeGol = input_nome_gol.value.trim().toLowerCase();
-    dadosUsuario.sobrenomeGol = input_sobrenome_gol.value.trim().toLowerCase();
     dadosUsuario.fkJogoGol = input_jogo.value;
-    dadosUsuario.nomeAssistencia = input_nome_assistencia.value.trim().toLowerCase();
-    dadosUsuario.sobrenomeAssistencia = input_sobrenome_assistencia.value.trim().toLowerCase();
     dadosUsuario.fkJogoAssistencia = input_jogo_assistencia.value;
 }
 
@@ -34,10 +26,8 @@ function gols() {
     const idEsta = btn_gols.value = 1
     console.log(dadosUsuario)
     limparDiv()
-    if (dadosUsuario.nomeGol == "" || dadosUsuario.sobrenomeGol == "" || isNaN(gol) || isNaN(dadosUsuario.fkJogoGol)) {
-        div_jogo.innerHTML = `Por favor, preencha o nome completo do jogador, o jogo e a quantidade de gols.`;
-    } else if (dadosUsuario.sobrenomeSession != dadosUsuario.sobrenomeGol || dadosUsuario.nomeSession != dadosUsuario.nomeGol) {
-        div_jogo.innerHTML = ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
+    if (!gol|| !dadosUsuario.fkJogoGol) {
+        div_jogo.innerHTML = `Por favor, preencha o jogo e a quantidade de gols.`;
     } else {
         atualizarGraficos()
         fetch("/entrada/cadastrar", {
@@ -51,8 +41,8 @@ function gols() {
                 fkUsuarioServer: dadosUsuario.fkUsuario,
                 fkJogoServer: dadosUsuario.fkJogoGol,
                 idEstaServer: idEsta,
-                nomeServer: dadosUsuario.nomeGol,
-                sobrenomeServer: dadosUsuario.sobrenomeGol,
+                nomeServer: dadosUsuario.nomeSession,
+                sobrenomeServer: dadosUsuario.sobrenomeSession,
                 golServer: gol,
                 assistenciaServer: assistencia
             }),
@@ -80,10 +70,8 @@ function assistencias() {
     const idEsta = btn_assistencia.value + 2
 
     limparDiv()
-    if (dadosUsuario.nomeAssistencia == "" || dadosUsuario.sobrenomeAssistencia == "" || isNaN(assistencia) || isNaN(dadosUsuario.fkJogoAssistencia)) {
-        div_jogo.innerHTML += `Por favor, preencha o nome completo do jogador, o jogo e a quantidade de assistência.`;
-    } else if (dadosUsuario.sobrenomeAssistencia != dadosUsuario.sobrenomeSession || dadosUsuario.nomeAssistencia != dadosUsuario.nomeSession) {
-        div_jogo.innerHTML += ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
+    if (!gol|| !dadosUsuario.fkJogoAssistencia) {
+        div_jogo.innerHTML += `Por favor, preencha o jogo e a quantidade de assistência.`;
     } else {
         atualizarGraficos()
         fetch("/entrada/cadastrar", {
@@ -97,8 +85,8 @@ function assistencias() {
                 fkUsuarioServer: dadosUsuario.fkUsuario,
                 fkJogoServer: dadosUsuario.fkJogoAssistencia,
                 idEstaServer: idEsta,
-                nomeServer: dadosUsuario.nomeAssistencia,
-                sobrenomeServer: dadosUsuario.sobrenomeAssistencia,
+                nomeServer: dadosUsuario.nomeSession,
+                sobrenomeServer: dadosUsuario.sobrenomeSession,
                 golServer: gol,
                 assistenciaServer: assistencia
             }),

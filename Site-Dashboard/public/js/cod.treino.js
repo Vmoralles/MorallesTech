@@ -1,31 +1,17 @@
 const dadosUsuario = {
-    nomeGol: "",
-    sobrenomeGol: "",
-    nomeAssistencia: "",
-    sobrenomeAssitencia: "",
     fkUsuario: sessionStorage.ID_USUARIO,
-}
-
-function atualizarDadosUsuario() {
-    dadosUsuario.nomeGol = input_nome_gol.value.trim().toLowerCase();
-    dadosUsuario.sobrenomeGol = input_sobrenome_gol.value.trim().toLowerCase();
-    dadosUsuario.nomeAssistencia = input_nome_assistencia.value.trim().toLowerCase();
-    dadosUsuario.sobrenomeAssitencia = input_sobrenome_assistencia.value.trim().toLowerCase();
+    nomeSession: sessionStorage.NOME_USUARIO.toLowerCase(),
+    sobrenomeSession: sessionStorage.SOBRENOME_USUARIO.toLowerCase()
 }
 
 function atualizarGraficos() {
     window.location = "../dashboard/site.treino.html"
 }
 
-// Definindo o intervalo de atualização 
-setInterval(atualizarDadosUsuario, 1000);
-
 function gols() {
     const gol = parseInt(document.getElementById('input_gols').value);
-    if (dadosUsuario.nomeGol == "" || dadosUsuario.sobrenomeGol == "" || isNaN(gol)) {
-        div_treino.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de gols.`;
-    } else if (dadosUsuario.sobrenomeAssistencia != dadosUsuario.sobrenomeSession || dadosUsuario.nomeAssistencia != dadosUsuario.nomeSession) {
-        div_treino.innerHTML += ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
+    if (!gol) {
+        div_treino.innerHTML = `Por favor, preencha a quantidade de gols.`;
     } else {
         atualizarGraficos()
         fetch("/artilheiro/cadastrar", {
@@ -36,8 +22,8 @@ function gols() {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomeServer: dadosUsuario.nomeGol,
-                sobrenomeServer: dadosUsuario.sobrenomeGol,
+                nomeServer: dadosUsuario.nomeSession,
+                sobrenomeServer: dadosUsuario.sobrenomeSession,
                 golServer: gol,
                 fkUsuarioServer: dadosUsuario.fkUsuario,
             }),
@@ -62,10 +48,8 @@ function gols() {
 
 function assistencias() {
     const assistencia = parseInt(document.getElementById('input_assistencia').value);
-    if (dadosUsuario.nomeAssistencia === "" || dadosUsuario.sobrenomeAssitencia === "" || isNaN(assistencia)) {
-        div_treino.innerHTML += `Por favor, preencha o nome completo do jogador e a quantidade de assistência.`;
-    } else if (dadosUsuario.sobrenomeAssistencia != dadosUsuario.sobrenomeSession || dadosUsuario.nomeAssistencia != dadosUsuario.nomeSession) {
-        div_treino.innerHTML += ` Você não é o ${dadosUsuario.nomeSession} ${dadosUsuario.sobrenomeSession}`
+    if (!assistencia) {
+        div_treino.innerHTML = `Por favor, preencha a quantidade de assistência.`;
     } else {
         atualizarGraficos()
         fetch("/maestro/cadastrar", {
@@ -76,8 +60,8 @@ function assistencias() {
             body: JSON.stringify({
                 // crie um atributo que recebe o valor recuperado aqui
                 // Agora vá para o arquivo routes/usuario.js
-                nomeServer: dadosUsuario.nomeAssistencia,
-                sobrenomeServer: dadosUsuario.sobrenomeAssitencia,
+                nomeServer: dadosUsuario.nomeSession,
+                sobrenomeServer: dadosUsuario.sobrenomeSession,
                 assistenciaServer: assistencia,
                 fkUsuarioServer: dadosUsuario.fkUsuario,
             }),

@@ -223,3 +223,10 @@ footer {
     width: 10vh;
     height: 8vh;
 }
+#div_alert {
+    color: white;
+    text-align: center;
+    border-radius: 1vh;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 1);
+    background-color: #FDCD1C;
+}

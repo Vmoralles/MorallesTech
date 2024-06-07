@@ -1,13 +1,12 @@
 function enviar() {
     const nome = input_nome.value
-    const email = input_email.value
+    const email = sessionStorage.EMAIL_USUARIO
     const assunto = input_assunto.value
     const problema = input_problema.value
     const fkUsuario = sessionStorage.ID_USUARIO
 
     // verificação de campos
-    if (email == "" ||
-        assunto == "" ||
+    if (assunto == "" ||
         problema == "" ||
         fkUsuario == "" ||
         nome == "") {
@@ -30,14 +29,14 @@ function enviar() {
         })
             .then(response => {
                 if (response.ok) {
-                    alert('E-mail enviado com sucesso!');
+                    div_alert.innerHTML = ('E-mail enviado com sucesso!');
                 } else {
-                    alert('Erro ao enviar o e-mail. Por favor, tente novamente.');
+                    div_alert.innerHTML = ('Erro ao enviar o e-mail. Por favor, tente novamente.');
                 }
             })
             .catch(error => {
                 console.error('Erro:', error);
-                alert('Erro ao enviar o e-mail. Por favor, tente novamente.');
+                div_alert.innerHTML = ('Erro ao enviar o e-mail. Por favor, tente novamente.');
             });
 
 
@@ -74,8 +73,4 @@ function enviar() {
         return false;
     }
 
-}
-
-function sumirMensagem() {
-    div_alert.style.display = "none";
 }

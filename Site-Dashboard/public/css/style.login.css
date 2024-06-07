@@ -216,14 +216,13 @@ footer {
 
 #div_alert {
     color: #FDCD1C;
-    ;
     text-align: center;
     margin: 2vh auto;
     width: 15vw;
     border-radius: 1vh;
     box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 1);
     background-color: #0057B6;
-    margin-left: 45vw;
+    margin-left: 44.5vw;
 }
 
 .loading {
@@ -232,12 +231,12 @@ footer {
     margin: 2vh auto;
     width: 15vw;
     border-radius: 1vh;
-    margin-left: 45vw;
+    margin-left: 44.5vw;
     display: flex;
     justify-content: center;
 }
 
-#loading-gif{
-    display:none;
-   height: 8vh;
+#loading-gif {
+    display: none;
+    height: 8vh;
 }

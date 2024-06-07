@@ -75,6 +75,7 @@ function registrar() {
             finalizarAguardar();
             return false;
         } else {
+            sumirMensagem()
             fetch("/usuarios/cadastrar", {
                 method: "POST",
                 headers: {
@@ -124,7 +125,7 @@ function registrar() {
 
 
 function sumirMensagem() {
-    div_alert.style.display = "none";
+    div_alert.style.display = 'none';
 }
 
 

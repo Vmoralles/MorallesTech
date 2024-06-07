@@ -144,9 +144,11 @@ nav ul li a:hover {
 .cadastrar-label-4 {
     margin-left: 14.6vw;
 }
+
 .cadastrar-label-5 {
     margin-left: 14.7vw;
 }
+
 .cadastrar-label-6 {
     margin-left: 13.5vw;
 }
@@ -203,7 +205,7 @@ nav ul li a:hover {
     color: black;
     margin-bottom: 10vh;
     margin-left: 2.3vw;
-   
+
 }
 
 .login a {
@@ -215,16 +217,20 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-#div_alert{
+#div_alert {
     color: #FDCD1C;;
     text-align: center;
-    margin: 2vh auto;
-    width: 13vw; 
+    width: 15vw;
     border-radius: 1vh;
     box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 1);
     background-color: #0057B6;
-    margin-left: 45vw;
+    margin-top: -50vh;
+    margin-left: 6vw;
+    z-index: 999;
+    position: absolute;
 }
+
+
 footer {
     background-color: #0057B6;
     color: #fdfdfd;
@@ -236,6 +242,7 @@ footer {
     height: 2.5vh;
     font-size: 2vh;
 }
+
 .loading {
     color: #FDCD1C;
     text-align: center;
@@ -245,9 +252,13 @@ footer {
     margin-left: 45vw;
     display: flex;
     justify-content: center;
+    margin-top: -50vh;
+    margin-left: 6vw;
+    z-index: 999;
+    position: absolute;
 }
 
-#loading-gif{
-    display:none;
-   height: 8vh;
+#loading-gif {
+    display: none;
+    height: 8vh;
 }
