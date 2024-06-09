@@ -28,7 +28,7 @@ function entrar() {
     
             if (resposta.ok) {
                 console.log(resposta);
-    
+
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));

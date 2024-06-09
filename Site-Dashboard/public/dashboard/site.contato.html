@@ -36,32 +36,28 @@
         <h2 class="subtitulo">Preencha o formulário para entrar em contato!</h2>
 
         <div class="container">
-            <form method="post">
             <div class="box">
-
                 <div class="esquerda">
                     <img src="../assent/Escudo.png" alt="">
                 </div>
-                
                     <div class="direita">
                         <div class="input-container">
-                            <label for="label_nome">Nome Completo</label>
+                            <label for="input_nome">Nome Completo</label>
                             <input type="text" required id="input_nome" placeholder="Digite o seu nome completo">
                         </div>
                         <div class="input-container">
-                            <label for="label_assunto">Assunto</label>
+                            <label for="input_assunto">Assunto</label>
                             <input type="text" required id="input_assunto" placeholder="Digite o assunto">
                         </div>
                         <div class="input-container">
-                            <label for="label_problema">Escreva mais sobre o seu problema</label>
+                            <label for="input_problema">Escreva mais sobre o seu problema</label>
                             <input type="text" required id="input_problema" placeholder="Descreva seu problema...">
                         </div>
                         <div class="input-container">
-                            <button onclick="enviar()" class="botao-enviar">Enviar</button>
+                            <button id="button--submit" onclick="email()" class="botao-enviar">Enviar</button>
                         </div>
                         <div id="div_alert"></div>
                     </div>
-                </form>
             </div>
         </div>
 

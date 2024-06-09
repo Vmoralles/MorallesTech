@@ -77,6 +77,8 @@
 </html>
 
 <script>
+
+
     var special_words = ['Pelé', 'La Bombonera', 'Real Madrid', 'Uruguai', 'Goleiro', 'Neymar', 'Maracanã', 'Kaká', 'Rússia', 'Itália'];
 
     var questions_list = [
@@ -295,7 +297,7 @@
             setTimeout(function () {
                 destroyGrid();
             }, 3000);
-        } 
+        }
 
 
     }
@@ -349,13 +351,39 @@
     }
 
     function verify() {
-        var answer = input_answer.value;
-
+        let answer = input_answer.value;
+        const idUsuario = sessionStorage.ID_USUARIO;
         if (answer != '') {
             // answer = answer.toLowerCase();
             if (answer == special_words[cont_correctAnswer]) {
                 div_verifiedAnswer.classList.add('correctAnswer');
                 cont_correctAnswer++;
+
+                fetch("/cruzadinha/registrar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        // crie um atributo que recebe o valor recuperado aqui
+                        // Agora vá para o arquivo routes/usuario.js
+                        fkUsuarioServer: idUsuario,
+                        resultadoServer: answer
+                    }),
+                })
+                    .then(function (resposta) {
+                        console.log("resposta: ", resposta);
+
+                        if (resposta.ok) {
+                            console.log("Funcionou")
+                        } else {
+                            throw "Houve um erro ao tentar realizar o cadastro!";
+                        }
+                    })
+                    .catch(function (resposta) {
+                        console.log(`#ERRO: ${resposta}`);
+
+                    });
             }
             else {
                 div_verifiedAnswer.classList.add('wrongAnswer');
@@ -371,10 +399,12 @@
 
             input_answer.value = '';
             gameSequence();
+
         }
         else {
             alert('Por Favor, digite uma resposta na caixa de texto');
         }
     }
+
 </script>
 <script src="../js/cod.sessao.js"></script>

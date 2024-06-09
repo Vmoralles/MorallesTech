@@ -8,15 +8,14 @@ sobrenome varchar(255),
 email varchar(255) unique,
 senha varchar(255),
 telefone char(11));
-	
-    select * from usuario;
+
 create table jogo(
 idJogo int primary key auto_increment,
 jogo varchar(255),
 dtJogo datetime,
 competicao varchar(100),
 fkUsuario int,
-constraint fkUsuario foreign key (fkUsuario) references Usuario(idUsuario));
+constraint fkUsuario foreign key (fkUsuario) references usuario(idUsuario));
 insert into jogo values
 (1, "Ministerio X Rb P.S.A","2024-05-15 19:00:00", "Copa Noturna", default),
 (2, "Ministerio X America FC P.S.A","2024-05-18 19:00:00", "Copa Noturna", default),
@@ -65,3 +64,25 @@ sobrenome varchar(255),
 assistencia int,
 fkUsuario int,
 constraint chk_fkTreino foreign key (fkUsuario) references usuario(idUsuario));
+
+create table cruzadinha (
+idCruzadinha int auto_increment,
+fkUsuario int,
+constraint fkUsuario_chk foreign key (fkUsuario) references usuario(idUsuario),
+constraint chk_pkComposta primary key(idCruzadinha, fkUsuario),
+resultado varchar(100));
+
+DELIMITER $  
+ CREATE FUNCTION fun_valida_usuario
+	(p_email VARCHAR(45), p_senha VARCHAR(200) ) 
+RETURNS INT(1)  
+DETERMINISTIC
+ BEGIN  
+ DECLARE l_ret INT(1) DEFAULT 0;  
+     SET l_ret = IFNULL((SELECT DISTINCT 1 FROM usuario WHERE email = p_email  
+                       AND senha = SHA2(p_senha,256)),0);                           
+ RETURN l_ret;  
+ END$  
+ DELIMITER ; 
+ 
+ 

@@ -18,9 +18,10 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var entradaRouter = require("./src/routes/entrada");
-var maestroRouter =  require("./src/routes/maestro");
-var artilheiroRouter =  require("./src/routes/artilheiro");
+var maestroRouter = require("./src/routes/maestro");
+var artilheiroRouter = require("./src/routes/artilheiro");
 var contatoRouter = require("./src/routes/contato");
+var cruzadinhaRouter = require("./src/routes/cruzadinha");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,6 +35,7 @@ app.use("/entrada", entradaRouter);
 app.use("/maestro", maestroRouter);
 app.use("/artilheiro", artilheiroRouter);
 app.use("/contato", contatoRouter);
+app.use("/cruzadinha", cruzadinhaRouter);
 
 
 
