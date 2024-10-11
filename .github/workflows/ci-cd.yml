@@ -3,10 +3,10 @@ name: CI-CD Pipeline
 on:
   push:
     branches:
-      - main
+      - Teste-deploy
   pull_request:
     branches:
-      - main
+      - Teste-deploy
 
 jobs:
   prepare:
@@ -84,7 +84,6 @@ jobs:
     needs: dockerize
     steps:
      - name: deploy to EC2 via ssh
-       uses: appleboy/ssh-action@v0.1.7
        with:
          host: ${{ secrets.EC2_HOST }}
          username: ubuntu
