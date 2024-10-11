@@ -1,24 +1,24 @@
+# Use uma imagem base do Node.js
 FROM node:20
 
-# Definindo o diretório de trabalho
+# Crie um diretório de trabalho
 WORKDIR /usr/src/app
 
-# Clonando a branch Teste do repositório
-RUN git clone https://github.com/Vmoralles/MorallesTech.git .
+# Copie os arquivos de configuração do Node.js
+COPY Site-Dashboard/package*.json ./
 
-# Mudando para o diretório do Site-Dashboard
-WORKDIR /usr/src/app/MorallesTech/Site-Dashboard
-
-# Verificando a estrutura de arquivos
-RUN ls -la /usr/src/app/MorallesTech/Site-Dashboard
-
-# Verificando se o package.json está presente
-RUN [ -f /usr/src/app/MorallesTech/Site-Dashboard/package.json ] || (echo "Arquivo package.json não encontrado" && exit 1)
-
-# Instalando dependências
+# Instale as dependências
 RUN npm install
 
+# Copie o restante do código da aplicação
+COPY Site-Dashboard/ ./
+
+# Exponha a porta da aplicação
 EXPOSE 8080
+
+# Comando para iniciar a aplicação
+CMD ["npm", "start"]
+
 
 CMD ["npm", "start"]
 
