@@ -1,7 +1,20 @@
 FROM node:20
-WORKDIR /home/ubuntu
-RUN git clone https://github.com/Vmoralles/MorallesTech.git .
-WORKDIR /home/ubuntu/MorallesTech/Site-Dashboard/
+
+# Definindo o diretório de trabalho
+WORKDIR /usr/src/app
+
+# Clonando a branch Teste do repositório
+RUN git clone --branch Teste https://github.com/Vmoralles/MorallesTech.git .
+
+# Mudando para o diretório do Site-Dashboard
+WORKDIR /usr/src/app/MorallesTech/Site-Dashboard
+
+# Verificando a estrutura de arquivos
+RUN ls -la
+
+# Instalando dependências
 RUN npm install
-CMD ["npm", "start"]
+
 EXPOSE 8080
+
+CMD ["npm", "start"]
