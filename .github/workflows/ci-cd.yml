@@ -3,10 +3,10 @@ name: CI-CD Pipeline
 on:
   push:
     branches:
-      - main
+      - Teste
   pull_request:
     branches:
-      - main
+      - Teste
 
 jobs:
   prepare:
@@ -84,6 +84,14 @@ jobs:
     needs: dockerize
     steps:
      - name: deploy to EC2 via ssh
+       uses: appleboy/ssh-action@v0.1.7
+       with:
+         host: ${{ secrets.EC2_HOST }}
+         username: ubuntu
+         key: ${{ secrets.EC2_SSH_KEY }}
+         script: |
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nodeimage:v2
+            sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/nodeimage:v2
        uses: appleboy/ssh-action@v0.1.7
        with:
          host: ${{ secrets.EC2_HOST }}
