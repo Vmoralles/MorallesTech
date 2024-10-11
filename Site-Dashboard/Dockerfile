@@ -1,7 +1,8 @@
 FROM node:20
-WORKDIR /home/ubuntu
+WORKDIR /usr/src/app
 RUN git clone https://github.com/Vmoralles/MorallesTech.git .
-WORKDIR /home/ubuntu/MorallesTech/Site-Dashboard
+WORKDIR /usr/src/app/MorallesTech/Site-Dashboard
 RUN npm install
-CMD ["npm", "start"]
 EXPOSE 8080
+CMD ["npm", "start"]
+
