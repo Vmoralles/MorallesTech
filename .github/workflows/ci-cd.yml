@@ -30,6 +30,7 @@ jobs:
       - name: Install dependencies
         run: |
          cd Site-Dashboard
+         ls -la
          npm install
 
   build:
