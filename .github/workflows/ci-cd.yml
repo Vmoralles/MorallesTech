@@ -88,4 +88,8 @@ jobs:
        with:
          host: ${{ secrets.EC2_HOST }}
          username: ubuntu
+         key: ${{ secrets.EC2_SSH_KEY }}
+         script: |
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nodeimage:v2
+            sudo docker run -d -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/nodeimage:v2
 
